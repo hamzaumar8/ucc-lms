@@ -22,10 +22,10 @@ def home(request):
 def signIn(request):
     users = User.objects.all()
     datadict={
-        'user': users.order_by('-pk')
+        'user': users.last()
         }
     studCreate = CreateStudentForm(datadict)
-    print(users[len(users)-1])
+    # print(users[len(users)-1])
     if request.method == 'POST':
         studCreate = CreateStudentForm(request.POST, datadict)
         if studCreate.is_valid():
