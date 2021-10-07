@@ -95,11 +95,11 @@ def createUser(request):
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get('username')
+            user = form.save()
+            username = form.cleaned_data.get('username')
             group = Group.objects.get(name='student')
             user.groups.add(group)
-            messages.success(request, f'{user} has been added successfully')
+            messages.success(request, f'{username} has been added successfully')
             return redirect('view-users')
     context = {'form': form}
     return render(request, 'ucclms/create-user.html', context)
