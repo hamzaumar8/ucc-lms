@@ -38,8 +38,8 @@ def signIn(request):
             
         if user is not None:
             login(request, user)
-            user_group = request.user.groups.all()[0].name
-            print(user_group)
+            user_group = request.user.groups.all().first().name
+            print('howdy',user_group)
             if 'admin' in user_group:          
                 return redirect('admin-dashboard')
             elif 'student' in user_group:          
