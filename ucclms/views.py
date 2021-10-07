@@ -38,7 +38,7 @@ def signIn(request):
             
         if user is not None:
             login(request, user)
-            user_group = request.user.groups.all().first().name
+            user_group = request.user.groups.all()[0].name
             print('howdy',user_group)
             if 'admin' in user_group:          
                 return redirect('admin-dashboard')
@@ -97,6 +97,8 @@ def createUser(request):
         if form.is_valid():
             form.save()
             user = form.cleaned_data.get('username')
+            group = Group.objects.get(name='student')
+            user.groups.add(group)
             messages.success(request, f'{user} has been added successfully')
             return redirect('view-users')
     context = {'form': form}
