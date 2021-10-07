@@ -22,7 +22,7 @@ def home(request):
 def signIn(request):
     users = User.objects.all()
     datadict={
-        'user': users[len(users)-1]
+        'user': users.order_by('-pk')
         }
     studCreate = CreateStudentForm(datadict)
     print(users[len(users)-1])
