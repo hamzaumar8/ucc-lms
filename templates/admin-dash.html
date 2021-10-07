@@ -1,0 +1,57 @@
+{% load static %}
+<div class="container-fluid admin-dashboard"></div>
+      <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block  py-2 px-md-3 bg-dark sidebar collapse">
+                  <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                      <li class="nav-item mb-2">
+                        <a class="nav-link active" aria-current="page" href="#">
+                          <i class="fas fa-home"></i>
+                          Home
+                        </a>
+                      </li>
+                      <li class="nav-item mb-2">
+                        <a class="nav-link" href="{% url 'view-users' %}">
+                          <i class="fas fa-user"></i>
+                          View Users
+                        </a>
+                      </li>
+                      <li class="nav-item mb-2">
+                        <a class="nav-link" href="#">
+                          <i class="fas fa-book"></i>
+                          All Books
+                        </a>
+                      </li>
+                      <li class="nav-item mb-2">
+                        <a class="nav-link" href="#">
+                          <i class="fas fa-book"></i>
+                          Add Books
+                        </a>
+                      </li>
+                      <li class="nav-item mb-2">
+                        <a class="nav-link" href="#">
+                          <i class="fas fa-book-reader"></i>
+                          Issue/Return Requests
+                        </a>
+                      </li>
+                      <li class="nav-item mb-2">
+                        <a class="nav-link" href="#">
+                          <i class="fas fa-book-open"></i>Recommendations
+                        </a>
+                      </li>
+                      <li class="nav-item mb-2">
+                        <a class="nav-link" href="#">
+                          <i class="fas fa-sign-out-alt"></i>
+                          Logout
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+            </nav>
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">ADMIN DASHBOARD</h1>
+                  </div>
+            </main>
+      </div>
+</div>

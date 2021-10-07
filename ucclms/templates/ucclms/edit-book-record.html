@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit book{% endblock %}
+
+{% block content %}
+<div class="container sign-up">
+    <form action="" method="POST" class="form mt-3 p-4 bg-dark sign-up-form">
+        {% csrf_token %}
+        <legend class="text-center">Edit book record</legend>
+        {{form.as_p}}
+        <div class="lower text-center">
+            <input type="submit" class="btn mb-3 btn-primary" name="edit user" value="Save">
+            <a href="{% url 'book-records' %}" class="btn mb-3 btn-danger" >Go back</a>
+            {{form.errors}}
+        </div>
+    </form>
+</div>
+    
+{% endblock %}

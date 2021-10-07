@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="home-wrapper">
+  <style>
+    nav.navbar{
+      display: none;
+    }
+  </style>
+
+  <nav class="home-navbar">
+    <div class="container-fluid nav-wrapper py-3">
+      <div class="logo"><a href="/"><img src="{% static '/img/ucc_web_logo.png' %}" alt="ucc_logo.jpg" height="30px">UCC LMS</a></div>
+      <ul class="nav-menu">
+        <li>
+          <a href="#gallery" class="btn">Gallery</a>
+        </li>
+        <li>
+          <a href="{% url 'about' %}" class="btn">About</a>
+        </li>
+        <li>
+          <a href="{% url 'student-dashboard' %}" class="btn">Dashboard</a>
+        </li>
+        <li>
+          <a href="{% url 'login' %}" class="btn">Login</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="hero">
+    <div class="container-fluid">
+      <div class="carousel-wrapper">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="{% static '/img/slideshow8.jpg' %}" class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <p>UCC Ranked 1st on her maiden appearance in 2022 times higher education world university rankings</p>
+                <a href="https://ucc.edu.gh/news/performance-ucc-her-maiden-appearance-2022-times-higher-education-world-university-rankings" class="btn btn-primary btn-sm">Read more</a>
+              </div>
+            </div>
+            
+            <div class="carousel-item">
+              <img src="{% static '/img/slideshow1.jpg' %}" class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <p>Africana Hybrid Library</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="{% static '/img/partner3.jpg' %}" class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <p>Open Educational Resources are educational materials and resources offered freely and openly for anyone to use and under some licenses to re-mix, improve and redistribute.They include: Learning content: full courses,...</p>
+                <a href="https://app.dimensions.ai/discover/publication" class="btn btn-primary btn-sm">Read more</a>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="{% static '/img/slideshow4.jpg' %}" class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <p>Protecting the health and safety of the library clients while sustaining access to our extensive collections, programs, and services has been at the core of Sam Jonah Library’s response to the COVID-19 pandemic.</p>
+                <a href="https://library.ucc.edu.gh/covid-19" class="btn btn-primary btn-sm">Read more</a>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="{% static '/img/slideshow3.jpg' %}" class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <p>Sir Sam Jonah at his Bronze figure unveiling ceromony at the Sam Jonah Library </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section id="gallery" class="gallery py-4">
+    <div class="container">
+      <div class="section-title text-center">
+        <h2>Gallery</h2>
+        <p>A featured gallery of some important events and people</p>
+      </div>
+      <div class="row">
+        <div class="img-holder col-md-4">
+          <img src="{% static '/img/slideshow1.jpg' %}" alt="img.jpg">
+          <small>An image of the Africana hybrid section of our library</small>
+        </div>
+        <div class="img-holder col-md-4">
+          <img src="{% static '/img/slideshow.jpg' %}" alt="img.jpg">
+          <small>The front view of Sam Jonah Library</small>
+        </div>
+        <div class="img-holder col-md-4">
+          <img src="{% static '/img/slideshow3.jpg' %}" alt="img.jpg">
+          <small>Sir Sam Jonah at his bronze figure unveiling</small>
+        </div>
+        <div class="img-holder col-md-4">
+          <img src="{% static '/img/slideshow6.jpg' %}" alt="img.jpg">
+          <small>Sir Sam Jonah at his bronze figure unveiling</small>
+        </div>
+        <div class="img-holder col-md-4">
+          <img src="{% static '/img/slideshow8.jpg' %}" alt="img.jpg">
+          <small>A side image of Sam Jonah Library</small>
+        </div>
+        <div class="img-holder col-md-4">
+          <img src="{% static '/img/background.jpg' %}" alt="img.jpg">
+          <small>Proposed library renovation schematic</small>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="partners py-4">
+    <div class="container">
+      <div class="section-title text-center">
+        <h2>Partners</h2>
+        <p>We partner with the following groups to bring you the best experience</p>
+      </div>
+      <div class="row">
+        <div class="img-holder col-lg-2 col-md-4">
+          <img src="{% static '/img/partner2.png' %}" alt="partner-image">
+        </div>
+        <div class="img-holder col-lg-2 col-md-4">
+          <img src="{% static '/img/partner2.jpeg' %}" alt="partner-image">
+        </div>
+        <div class="img-holder col-lg-2 col-md-4">
+          <img src="{% static '/img/partner2.jpg' %}" alt="partner-image">
+        </div>
+        <div class="img-holder col-lg-2 col-md-4">
+          <img src="{% static '/img/partner3.jpg' %}" alt="partner-image">
+        </div>
+        <div class="img-holder col-lg-2 col-md-4">
+          <img src="{% static '/img/partner3.png' %}" alt="partner-image">
+        </div>
+        <div class="img-holder col-lg-2 col-md-4">
+          <img src="{% static '/img/partner1.png' %}" alt="partner-image">
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="container py-5">
+      <div class="row mb-5">
+        <div class="col-md-4">
+          <strong>Follow us on social media</strong>
+          <ul class="row social-media">
+            <li class="col-md-6"><a href="https://www.facebook.com/capevars/" target="_blank"><i class="fab fa-facebook">‌</i>Facebook</a></li>
+		        <li class="col-md-6"><a href="https://business.google.com/u/1/dashboard/l/02923863611512028745?hl=en" target="_blank"><i class="fab fa-google-plus">‌</i>Google plus</a></li>
+		        <li class="col-md-6"><a href="https://www.linkedin.com/edu/university-of-cape-coast-12825" target="_blank">‌<i class="fab fa-linkedin">‌</i>LiknedIn</a></li>
+		        <li class="col-md-6"><a href="https://www.youtube.com/user/capevars" target="_blank"><i class="fab fa-youtube">‌</i>Youtube</a></li>
+		        <li class="col-md-6"><a href="https://twitter.com/CapeVars" target="_blank"><i class="fab fa-twitter">‌</i>Twitter</a></li>
+            <li class="col-md-6"><a href="https://en.wikipedia.org/wiki/University_of_Cape_Coast" target="_blank"><i class="fab fa-wikipedia-w">‌</i>Wikepedia</a></li>
+            <li class="col-md-6"><a href="https://www.flickr.com/photos/capevars" target="_blank"><i class="fab fa-flickr">‌</i>Flickr</a></li>
+            <li class="col-md-6"><a href="https://www.instagram.com/capevars" target="_blank"><i class="fab fa-instagram">‌</i>Instagram</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <strong>Our library's opening hours</strong>
+          <ul>
+            <li class="text-bold">Normal days in the semester</li>
+            <li>Monday - Friday: 9am to 10pm</li>
+            <li>Saturday: 9am to 8pm</li>
+          </ul>
+          <ul>
+            <li class="text-bold">Examination period</li>
+            <li>Monday - Friday: 9am to 5am</li>
+            <li>Saturday: 9am to 8pm</li>
+            <li>NB: Our library remains closed on holidays</li>
+          </ul>
+
+        </div>
+        <div class="col-md-4">
+          <strong>Send us an email</strong>
+          <form action="">
+            <div class="input-group">
+              <input type="text" placeholder="Name" name="name" class="form-control col-md-6">
+              <input type="text" placeholder="Email" name="email" class="form-control col-md-6">
+            </div>
+              <textarea class="form-control" name="message" id="message" cols="30" rows="10" placeholder="Type your message"></textarea>
+              <a href="mailto:library@ucc.edu.gh" class="form-control btn btn-primary">SEND</a>
+          </form>
+        </div>
+      </div>
+      <strong class="copy">Developed in &copy;2021 </strong>
+    </div>
+  </footer>
+</div>
+{% endblock %}

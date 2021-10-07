@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Student Dashboard{% endblock %}
+{% block content %}
+      <div class="container-fluid dashboard admin-dashboard">
+        <div class="row">
+              <nav id="sidebarMenu" class="col-md-3 col-lg-3 d-md-block py-2 px-md-3 bg-dark
+               sidebar">
+                    <div class="position-sticky pt-3">
+                      <ul class="nav flex-column">
+                        <li class="nav-item mb-2">
+                          <a class="nav-link active" aria-current="page" href="{% url 'student-dashboard' %}">
+                            <i class="fas fa-home"></i>
+                            Home
+                          </a>
+                        </li>
+                        <hr>
+                        
+                        <li class="nav-item mb-2">
+                          <a class="nav-link" href="{% url 'student-borrowed-books' %}">
+                            <i class="fas fa-user"></i>
+                            Borrowed Books History
+                          </a>
+                        </li>
+                        <hr>
+                        <li class="nav-item mb-2">
+                          <a class="nav-link" href="{% url 'recommend-book'%}">
+                            <i class="fas fa-book"></i>
+                            Recommend Book
+                          </a>
+                        </li>
+                        <hr>
+                        <li class="nav-item mb-2">
+                          <a class="nav-link" href="">
+                            <i class="fas fa-book-reader"></i>
+                            Request Book
+                          </a>
+                        </li>
+                        <hr>
+                        <li class="nav-item mb-2">
+                          <a class="nav-link" href="{% url 'logout' %}">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+              </nav>
+              <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                          <h1 class="h2 text-center">USER PROFILE</h1>
+                    </div>
+                    {% for message in messages %}
+                    <br>
+                    <small id="messages" class="bg-warning p-1">
+                        {{message}}
+                    </small>
+                    <br>
+                    {% endfor %}
+              </main>
+        </div>
+      </div>
+{% endblock %}

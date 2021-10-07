@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %} Confirm delete {% endblock %}
+{% block content %} 
+<div class="container delete-user-form">
+    <form action="" method="POST" class="mt-5">
+        {% csrf_token %}
+        <h2>Sure to delete <strong style="text-transform: uppercase;">{{user}}</strong>?</h2>
+        <input type="submit" value="Confirm" class="btn btn-danger">
+        <a href="{% url 'view-users' %}" class="btn btn-secondary">Go back</a>
+    </form>
+</div>
+{% endblock %}

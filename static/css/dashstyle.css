@@ -1,0 +1,115 @@
+.admin-dashboard .rowe{
+    display: flex;
+}
+
+.rowe #sideMenu{
+    width: 400px;
+    padding: 1rem;
+    height: 90vh;
+    position: relative;
+}
+
+.rowe #sideMenu a{
+    color: black;
+}
+
+.rowe #sideMenu ul{
+    padding: 0;
+    margin-top: 3rem;
+    list-style: none;
+}
+
+.rowe #sideMenu ul li{
+    transition: all 0.2s ease;
+    border-radius: 5px;
+    white-space: nowrap;
+}
+.rowe #sideMenu ul li a{
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.rowe #sideMenu ul li:hover{
+    background: rgb(63, 63, 63);
+}
+
+.rowe #sideMenu ul li:hover a{
+    color: white;
+}
+
+.rowe #sideMenu ul li i{
+    margin-right: 20px;
+    
+}
+
+.rowe .menu-toggle{
+    position: absolute;
+    right: 1rem;
+}
+
+.rowe .sideMenu{
+    width: fit-content !important;
+    position: fixed !important;
+    top: 10vh;
+    left: 0;
+}
+
+.rowe .sideMenu.closed{
+    width: fit-content !important;
+}
+
+.rowe .sideMenu.closed li a{
+    padding: 10px;
+}
+.rowe .sideMenu.closed li a i{
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.rowe .sideMenu.closed li{
+    width: fit-content !important;
+}
+
+.rowe .sideMenu.closed li span{
+    display: none;
+}
+
+
+@media screen and (max-width:768px){
+    .admin-dashboard main.container{
+        flex-direction: column;
+    }
+    
+    .dashboard .sideMenu{
+        height: auto;        
+    }
+
+    .dashboard .sidebar i{
+        margin-right: 1rem;
+    }
+
+    .admin-dashboard main.container .user-profile,
+    .admin-dashboard main.container .aside{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 689px){
+    .admin-dashboard .rowe{
+        display: block;
+    }
+
+    .rowe .sideMenu.sideMenu.closed{
+        padding: 1rem !important;
+    }
+    
+    .rowe .sideMenu ul{
+        padding: 0;
+        margin: 0;
+    }
+    .rowe .sideMenu li a{
+        padding: 10px !important;
+        margin: 0 !important;
+    }
+}

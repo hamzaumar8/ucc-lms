@@ -1,0 +1,39 @@
+pRun the app
+>> python manage.py runserver
+
+Open a browser and enter the address in the searchbar
+
+localhost:8000
+
+.
+
+m
+r
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+student id should be required when borrowing book to identify student
+integrated search engine like google to search books online

@@ -1,0 +1,35 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block title %}Redirect{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <style>
+        body{
+            background: white;
+        }
+        .img-wrapper{
+            text-align: center;
+        }
+        nav .right{
+            display: none;
+        }
+        ul{
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+    <h1>Not allowed to access this page</h1>
+    <p>Try 
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="{% url 'student-dashboard' %}">Student dashboard</a></li>
+            <li><a href="{% url 'admin-dashboard' %}">Admin dashboard</a></li>
+        </ul>
+    </p>
+    <div class="img-wrapper">
+        <img src="{% static '/img/error.png' %}" alt="" width="70%">
+    </div>
+</div>
+{% endblock %}

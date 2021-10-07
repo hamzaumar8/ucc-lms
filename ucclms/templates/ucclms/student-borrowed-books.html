@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container users mt-5">
+    <a href="{% url 'student-dashboard' %}" class="btn btn-dark mb-1"><i class="fas fa-home"></i> Home</a>
+    
+    {% if book_records %}
+    <table class="table table-striped p-3 table-dark">
+        <legend>Borrowed Book Records for <strong style="text-transform: capitalize;">{{user}}</strong></legend>
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Book</td>
+                <td>Issue Date</td>
+                <td>Due Date</td>
+                <td>Return Date</td>
+                <td>Penalty (Ghc)</td>
+            </tr>
+        </thead>
+        <tbody>
+                {% for i in book_records %}
+                    <tr>
+                        <td>{{i.id}}</td>
+                        <td>{{i.book}}</td>
+                        <td>{{i.date_of_issue}}</td>
+                        <td>{{i.due_date}}</td>
+                        <td>{{i.date_of_return}}</td>
+                        <td>{{i.dues}}</td>
+                    </tr>
+                {% endfor %}
+                
+            </tbody>
+    </table>
+    {% else %}
+        <p class="my-4"> <strong class="text-bold" style="text-transform: capitalize;">{{user}}</strong> has no history of borrowed books</p>
+    {% endif %}
+</div>
+{% endblock %}

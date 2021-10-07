@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Recommend Book{% endblock %}
+{% block content %}
+<div class="container">
+    <form action="" method="POST" style="width: 500px; margin: auto;" class="form p-4 mt-4 bg-dark text-light sign-up">
+        {% csrf_token %}
+        <legend class="text-center mb-3">Add Book Recommendation</legend>
+        <div class="form-group mb-5" style="cursor: not-allowed;">
+            {{form.user.label}}
+            {{form.user}}
+        </div>
+        <div class="form-group mb-5">
+            {{form.book_name.label}}
+            {{form.book_name}}
+        </div>            
+        <div class="form-group mb-5">
+            {{form.description.label}}
+            {{form.description}}
+        </div>
+        <div class="lower text-center">
+            <input type="submit" value="Submit" name="submit" class="btn btn-primary">
+            <a href="{% url 'student-dashboard' %}" class="btn btn-secondary">Go back</a>
+        </div> 
+            {{form.errors}}
+    </form>
+</div>
+    {% endblock %}
