@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.db.models.fields.related import ForeignKey
-
 # Create your models here.
 
 class Book(models.Model):
@@ -46,8 +47,15 @@ class Student(models.Model):
     profile_pic = models.ImageField(blank=True, null=True)
     
     def __str__(self):
-        return self.user.username
-    
+        return self.user.email
+
+
+def student_receiver(sender, instance, created, *args, **kwargs):
+    if created:
+        print('checK', instance.id)
+        student = Student.objects.create(user=instance)
+
+post_save.connect(student_receiver, sender=User)    
     
 class Administrator(models.Model):
     user = models.OneToOneField(User, blank=True, null=True, on_delete=models.CASCADE)

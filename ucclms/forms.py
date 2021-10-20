@@ -36,7 +36,7 @@ class RecommendBookForm(ModelForm):
 class EditStudentProfile(ModelForm):
     class Meta:
         model = Student
-        fields = '__all__'
+        fields = [ 'index_number', 'profile_pic',]
 
 class CreateStudentForm(ModelForm):
     class Meta:

@@ -272,13 +272,14 @@ def about(request):
 
 def editProfile(request, pk):
     student = Student.objects.get(user=request.user)
-    form = CreateStudentForm(instance=student)
+    print(request.user.student)
+    form = EditStudentProfile(instance=request.user.student)
     if request.method == 'POST':
-        form = CreateStudentForm(request.POST, instance=student)
+        form = EditStudentProfile(request.POST, request.FILES, instance=request.user.student)
         if form.is_valid():
             form.save()
-
-            return redirect(request, 'student-dashboard')
+            messages.success(request, f'Your Profile has been updated!')
+            return redirect('edit-profile', pk=pk)
 
     context = {'form': form, 'person': student}
     return render(request, 'ucclms/edit-profile.html', context)
@@ -297,3 +298,23 @@ def editBookRecord(request, pk):
         
     context = {'form': form}
     return render(request, 'ucclms/edit-book-record.html', context)
+
+
+
+
+
+# weedseed
+from django.db.models import Q
+
+
+
+
+@allowed_users(allowed_roles=['admin'])
+def booksNotreturned(request):
+    # today = datetime.datetime.today()
+    # import datetime
+    #valid_until may be empty
+    # book_records = BookRecord.objects.filter(Q(due_date__lte=today)|Q(valid_until=None))
+    book_records = BookRecord.objects.filter(date_of_return=None)
+    context = {'book_records': book_records}
+    return render(request, 'ucclms/student-booksnot.html', context)
