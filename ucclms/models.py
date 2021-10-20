@@ -5,6 +5,14 @@ from django.dispatch import receiver
 from django.db.models.fields.related import ForeignKey
 # Create your models here.
 
+class Subject(models.Model):
+    name = models.CharField(unique=True, max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Book(models.Model):
     title = models.CharField(max_length = 255, blank=False, null=False)
     publisher = models.CharField(max_length = 255, blank=True, null=True)
@@ -12,6 +20,7 @@ class Book(models.Model):
     year = models.CharField(max_length = 4, blank=True, null=True)
     author = models.CharField(max_length = 255, blank=True, null=True)
     location = models.CharField(max_length = 255, blank=True, null=True)
+    subject = models.ForeignKey(Subject, on_delete=models.SET_NULL, null=True, blank=True, related_name='booksubject')
     
     def __str__(self):
         return self.title
