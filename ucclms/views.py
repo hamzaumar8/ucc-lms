@@ -153,6 +153,64 @@ def viewBooks(request):
     return render(request, 'ucclms/view-books.html', context)
 
 
+# @allowed_users(allowed_roles=['admin'])
+# def ImportUpload(request):
+#     entity = models.Entity.objects.filter(~Q(admin_email="info@onestepplabs.com"))
+#     if request.method == "POST":
+#         csv_file = request.FILES['file']
+#         # let's check if it is a csv file
+#         if not csv_file.name.endswith('.csv'):
+#             messages.error(request, 'THIS IS NOT A CSV FILE')
+#         if csv_file.size > 33554432:
+#             messages.error(request, 'The size must no br more then 32GB.')
+#         data_set = csv_file.read().decode('UTF-8')
+#         # setup a stream which is when we loop through each line we are able to handle a data in a stream
+#         io_string = io.StringIO(data_set)
+#         next(io_string)
+#         for column in csv.reader(io_string, delimiter=',', quotechar="|"):
+
+#             try:
+#                 _entity, created = models.Entity.objects.update_or_create(
+#                     name=column[0],
+#                     region=column[1],
+#                     admin_name=column[2],
+#                     admin_email=column[3],
+#                     phone_number=column[4],
+#                 )
+#                 _userregistration, created = models.UserRegistration.objects.update_or_create(
+#                     entity=_entity,
+#                     name=column[2],
+#                     region=column[1],
+#                     email=column[3],
+#                     phone_number=column[4],
+#                     is_staff=True 
+#                 )
+#                 # send mail
+#                 signup_invite_email(request, column[3])
+#             except IntegrityError as e: 
+#                 messages.warning(request, f"Duplicate entry, Please don't import an already existing Entity Name or Admin email (entity_name)!")
+#                 return HttpResponseRedirect(request.path_info)
+#             except Exception as e:
+#                 error = str(e)
+#                 messages.warning(request, f"{error}")
+#                 return HttpResponseRedirect(request.path_info)
+
+
+#         messages.success(
+#             request, f"Entity has been imported and a registration invite email has been sent this email!"
+#         )
+#         return redirect('dashboard:entities')
+#     context = {
+#         "dash_title": "Imports",
+#         "entities": entity,
+#     }
+    
+#     return render(request, "dashboard/imports.html", context)
+
+
+
+
+
 @allowed_users(allowed_roles=['admin'])
 @login_required(login_url='login')
 def recommendations(request):
@@ -318,3 +376,12 @@ def booksNotreturned(request):
     book_records = BookRecord.objects.filter(date_of_return=None)
     context = {'book_records': book_records}
     return render(request, 'ucclms/student-booksnot.html', context)
+
+
+
+
+
+
+
+
+
