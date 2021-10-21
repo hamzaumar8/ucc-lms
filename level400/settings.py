@@ -21,6 +21,7 @@ ALLOWED_HOSTS = ['lms-opata.herokuapp.com','localhost', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.sites', # New, needed by allauth app
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -29,6 +30,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ucclms.apps.UcclmsConfig',
     'crispy_forms',
+
+    #For social account login
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -93,6 +100,32 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# Google all auth configuration
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'offline',
+        }
+    }
+}
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_VERIFICATION = 'optional' # set to 'mandatory' to force email verification
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
+
+LOGIN_REDIRECT_URL = '/student-dashboard/'
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -113,11 +146,11 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
-STATIC_ROOT = [
-    os.path.join(BASE_DIR, 'staticfiles')
+    BASE_DIR / 'static'
 ]
 
 
@@ -143,6 +176,13 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = DEFAULT_FROM_EMAIL =  "ctmafri@gmail.com"
 EMAIL_HOST_PASSWORD = "yvbdactfcsfourif"
+
+
+# New
+SESSION_EXPIRE_SECONDS = 3600 # Expires after 1 hour
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())

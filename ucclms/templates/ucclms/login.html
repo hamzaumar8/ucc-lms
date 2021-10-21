@@ -1,4 +1,9 @@
 {% extends 'base.html'%}
+
+<!-- New -->
+{% load socialaccount %}
+<!-- New -->
+
 {% load static %}
 
 {% block title %} Login To UCC LMS{% endblock %}
@@ -44,6 +49,16 @@
     
             <div class="lower text-center">
                 <input type="submit" class="btn mb-3 btn-primary" name="login" value="Login">
+                <!-- New -->
+                <!-- <input type="submit" class="btn mb-3 btn-primary" name="login" value="Login"> -->
+                <div class="btn mb-3 btn-primary">
+                    <a href="{% provider_login_url 'google' %}">
+                        <i style="color:red;" class="fab fa-google"></i>
+                        <label class="text-dark">Login with Google</label>
+                    </a>
+                </div>
+                <!-- New -->
+
                 {% for message in messages %}
                 <br>
                 <span id="messages" class="text-danger bg-light p-2 my-5">
