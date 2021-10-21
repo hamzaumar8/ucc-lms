@@ -3,35 +3,43 @@
 {% block title %}View books{% endblock %}
 
 {% block content %}
-<div class="container users mt-5">
-    <a href="{% url 'admin-dashboard' %}" class="btn btn-dark mb-2"><i class="fas fa-home"></i> Home</a>
-    <a href="{% url 'add-subject' %}" class="btn btn-primary mb-2"><i class="fas fa-book-medical"></i> Add cathegory (subject)</a>
-    
-    <table class="table table-striped p-3 table-dark mt-2" id="table_id">
-        <thead>
-            <tr>
-                <td>ID</td>
-                <td>Name</td>
-                <td>No of book</td>
-                <td></td>
-            </tr>
-        </thead>
-        <tbody>
-            {% for book in subjects %}
-            <tr>
-                <td>{{book.id}}</td>
-                <td>{{book.name}}</td>
-                <td>
-                    <span style="margin: 0 10px">{{book.num_subject}}</span>   
-                    <a href="{% url 'subject-cat-info' book.id %}" class="btn text-white btn-sm">view all books</a></td>
 
-                <td>
-                    <a href="{% url 'edit-subject' book.id %}" class="btn btn-light btn-sm">Edit</a>
-                    <a href="{% url 'delete-subject' book.id %}" class="btn btn-danger btn-sm">Del</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
-    {% endblock %}
+
+<section class="section">
+    <div class="card">
+        <div class="card-header">
+            Simple Datatable
+        </div>
+        <div class="card-body">
+            <table class='table' id="table_id">
+                <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>Name</td>
+                        <td>No of book</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for book in subjects %}
+                    <tr>
+                        <td>{{book.id}}</td>
+                        <td>{{book.name}}</td>
+                        <td>
+                            <span style="margin: 0 10px">{{book.num_subject}}</span>
+                            <a href="{% url 'subject-cat-info' book.id %}" class="btn text-white btn-sm">view all
+                                books</a></td>
+
+                        <td>
+                            <a href="{% url 'edit-subject' book.id %}" class="btn btn-light btn-sm">Edit</a>
+                            <a href="{% url 'delete-subject' book.id %}" class="btn btn-danger btn-sm">Del</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</section>
+{% endblock %}

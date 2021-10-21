@@ -20,35 +20,152 @@
     <link href="{% static 'libs/datatables/buttons.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
     <link href="{% static 'libs/datatables/select.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
     <title>UCC LMS | {% block title%}{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+
+    <link rel="stylesheet" href="{% static 'vendors/chartjs/Chart.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'vendors/perfect-scrollbar/perfect-scrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
 </head>
 
 <body>
-    <nav class="navbar navbar-dark bg-dark py-3">
-        <div class="container-fluid">
-            <div class="logo"><a href="/"><img src="{% static '/img/ucc_web_logo.png' %}" alt="logo.png" height='30px'>
-                    UCC LMS</a></div>
-            <div class="right">
-                <span id="hello-msg" class="mx-5" style="text-transform: capitalize; color: white;">Welcome,
-                    {{request.user}}!</span>
-                <a href="{% url 'logout' %}" class="btn btn-primary">
-                    Logout <i class="fas fa-sign-out-alt"></i>
-                </a>
+
+   
+
+
+    <div id="app">
+        <div id="sidebar" class='active'>
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <img src="{% static '/img/ucc_web_logo.png' %}" alt="" srcset="" height='30px'>UCC LMS
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-item active ">
+                            <a href="{% url 'admin-dashboard' %}" class='sidebar-link'>
+                                <i data-feather="home" width="20"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'view-users' %}" class='sidebar-link'>
+                                <i data-feather="home" width="20"></i>
+                                <span>Users</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'view-subjects' %}" class='sidebar-link'>
+                                <i data-feather="home" width="20"></i>
+                                <span>Books Categories (Subject)</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'view-books' %}" class='sidebar-link'>
+                                <i data-feather="home" width="20"></i>
+                                <span>All Books</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'book-records' %}" class='sidebar-link'>
+                                <i data-feather="home" width="20"></i>
+                                <span>Issue/Return Requests</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'books-not-returned' %}" class='sidebar-link'>
+                                <i data-feather="home" width="20"></i>
+                                <span>Books Not Returned</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'stolen-books' %}" class='sidebar-link'>
+                                <i data-feather="home" width="20"></i>
+                                <span>Stolen Books</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'recommendations' %}" class='sidebar-link'>
+                                <i data-feather="home" width="20"></i>
+                                <span>Recommendations</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'logout' %}" class='sidebar-link'>
+                                <i data-feather="home" width="20"></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </div>
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
             </div>
         </div>
-    </nav>
-    {% if messages %}
-{% for message in messages %}
-  <div class="alert  alert-{{ message.tags }} alert-dismissible" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true" style="margin-right:30px;">&times;</span>
-    </button>
-    {{ message }}
-  </div>
-{% endfor %}
+        <div id="main">
+            <nav class="navbar navbar-header navbar-expand navbar-light">
+                <a class="sidebar-toggler" href="#"><span class="navbar-toggler-icon"></span></a>
+                <button class="btn navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav d-flex align-items-center navbar-light ml-auto">
+                        
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown"
+                                class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                                <div class="avatar mr-1">
+                                    <img src="{% static 'img/avatar/avatar-s-1.png' %}" alt="" srcset="">
+                                </div>
+                                <div class="d-none d-md-block d-lg-inline-block">Welcome, {{request.user}}!</div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="{% url 'logout' %}"><i data-feather="log-out"></i>
+                                    Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
 
-    {% endif %}
-    {% block content %}
-    {% endblock %}
+
+            <div class="main-content container">
+                <div class="page-title">
+                    <h3>{{ dash_title }}</h3>
+                </div>
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert  alert-{{ message.tags }} alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true" style="margin-right:30px;">&times;</span>
+                    </button>
+                    {{ message }}
+                </div>
+                {% endfor %}
+            
+                {% endif %}
+                {% block content %}
+                {% endblock %}
+
+            </div>
+            <footer>
+                <div class="footer clearfix mb-0 text-muted">
+                    <div class="float-left">
+                        <p>2020 &copy; Voler</p>
+                    </div>
+                    <div class="float-right">
+                        <p>Crafted with <span class='text-danger'><i data-feather="heart"></i></span> by <a
+                                href="http://ahmadsaugi.com">Ahmad Saugi</a></p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+
     <script src="/static/js/jquery-3.5.1.min.js"></script>
     <script src="/static/js/popper.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
@@ -57,7 +174,7 @@
     <script src="{% static 'libs/datatables/dataTables.bootstrap4.min.js' %}"></script>
     <script src="{% static 'libs/datatables/dataTables.responsive.min.js' %}"></script>
     <script src="{% static 'libs/datatables/responsive.bootstrap4.min.js' %}"></script>
-        
+
     <script src="{% static 'libs/datatables/dataTables.buttons.min.js' %}"></script>
     <script src="{% static 'libs/datatables/buttons.bootstrap4.min.js' %}"></script>
     <script src="{% static 'libs/datatables/buttons.html5.min.js' %}"></script>
@@ -72,9 +189,17 @@
     <script src="{% static 'libs/datatables/init.js' %}"></script>
 
 
-    <script src="/static/js/main.js"></script>
 
-    
+    <script src="{% static 'js/feather-icons/feather.min.js' %}"></script>
+    <script src="{% static 'vendors/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+
+    <script src="{% static 'vendors/chartjs/Chart.min.js' %}"></script>
+    <script src="{% static 'vendors/apexcharts/apexcharts.min.js' %}"></script>
+    <script src="{% static 'js/pages/dashboard.js' %}"></script>
+
+    <script src="{% static 'js/main.js' %}"></script>
+
 </body>
 
 </html>

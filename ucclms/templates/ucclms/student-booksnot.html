@@ -1,57 +1,59 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container users mt-5">
-    <a href="{% url 'admin-dashboard' %}" class="btn btn-dark mb-1"><i class="fas fa-home"></i> Home</a>
+<section class="section">
+    <div class="card">
+        <div class="card-header">
+        </div>
+        <div class="card-body">
 
-    {% if book_records %}
-    <table class="table table-striped p-3 table-dark" id="table_id">
-        <legend>Books Not Returned for <strong style="text-transform: capitalize;">{{user}}</strong></legend>
-        <thead>
-            <tr>
-                <td>ID</td>
-                <td>Book</td>
-                <td>Issued To (student name)</td>
-                <td>Issue Date</td>
-                <td>Due Date</td>
-                <td>Stolen</td>
-            </tr>
-        </thead>
-        <tbody>
-            {% for i in book_records %}
-            <tr>
-                <td>{{i.id}}</td>
-                <td>{{i.book}}</td>
-                <td>{{i.user}}</td>
-                <td>{% if i.date_of_issue != None %}
-                    {{i.date_of_issue}}
-                    {%else%}
-                    ----------
-                    {%endif%}
-                </td>
-                <td>{% if i.due_date != None %}
-                    {{i.due_date}}
-                    {%else%}
-                    ----------
-                    {%endif%}
-                </td>
-                <td>
-                    <!-- <a href="{% url 'edit-book' i.id %}" class="btn btn-light btn-sm">Edit</a> -->
-                    {% if i.book.is_stolen  %}
-                        Stolen
-                    {% else %}
-                    <a href="{% url 'add-stolen-book' i.id %}" class="btn btn-danger btn-sm">add</a>
 
-                    {%endif%}
-                </td>
-            </tr>
-            {% endfor %}
+            <table class='table' id="table_id">
+                <legend>Books Not Returned for <strong style="text-transform: capitalize;">{{user}}</strong></legend>
+                <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>Book</td>
+                        <td>Issued To (student name)</td>
+                        <td>Issue Date</td>
+                        <td>Due Date</td>
+                        <td>Stolen</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in book_records %}
+                    <tr>
+                        <td>{{i.id}}</td>
+                        <td>{{i.book}}</td>
+                        <td>{{i.user}}</td>
+                        <td>{% if i.date_of_issue != None %}
+                            {{i.date_of_issue}}
+                            {%else%}
+                            ----------
+                            {%endif%}
+                        </td>
+                        <td>{% if i.due_date != None %}
+                            {{i.due_date}}
+                            {%else%}
+                            ----------
+                            {%endif%}
+                        </td>
+                        <td>
+                            <!-- <a href="{% url 'edit-book' i.id %}" class="btn btn-light btn-sm">Edit</a> -->
+                            {% if i.book.is_stolen  %}
+                            Stolen
+                            {% else %}
+                            <a href="{% url 'add-stolen-book' i.id %}" class="btn btn-danger btn-sm">add</a>
 
-        </tbody>
-    </table>
-    {% else %}
-    <p class="my-4"> <strong class="text-bold" style="text-transform: capitalize;">{{user}}</strong> has no history of
-        borrowed books</p>
-    {% endif %}
-</div>
+                            {%endif%}
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</section>
 {% endblock %}

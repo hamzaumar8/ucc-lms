@@ -284,7 +284,7 @@ def viewBooks(request):
 @login_required(login_url='login')
 def viewSubject(request):
     subjects = Subject.objects.order_by('-id').annotate(num_subject=Count('booksubject', distinct=True))
-    context = {'subjects': subjects}
+    context = {'dash_title':"Books Categories (Subjects)",'subjects': subjects}
     return render(request, 'ucclms/view-subjects.html', context)
 
 
@@ -509,7 +509,7 @@ def StolenBooks(request):
 def viewSubjectDet(request, *args, **kwargs):
     subject = get_object_or_404(Subject, pk=kwargs["id"])
     books = Book.objects.filter(subject=subject).order_by('-id')
-    context = {'books': books}
+    context = {'dash_title':"Books Categories (Subjects)",'books': books}
     return render(request, 'ucclms/view-book-cat.html', context)
 
 
