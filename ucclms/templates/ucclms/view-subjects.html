@@ -23,7 +23,7 @@
                 <td>{{book.name}}</td>
                 <td>
                     <span style="margin: 0 10px">{{book.num_subject}}</span>   
-                    <a href="#" class="btn text-white btn-sm">view all books</a></td>
+                    <a href="{% url 'subject-cat-info' book.id %}" class="btn text-white btn-sm">view all books</a></td>
 
                 <td>
                     <a href="{% url 'edit-subject' book.id %}" class="btn btn-light btn-sm">Edit</a>

@@ -160,46 +160,6 @@ def userPage(request):
 
 
 
-@login_required(login_url='login')
-def viewBooks(request):
-    books = Book.objects.order_by('-id')
-    if request.method == "POST":
-        csv_file = request.FILES['file']
-        # let's check if it is a csv file
-        if not csv_file.name.endswith('.csv'):
-            messages.error(request, 'THIS IS NOT A CSV FILE')
-        if csv_file.size > 33554432:
-            messages.error(request, 'The size must no br more then 32GB.')
-        data_set = csv_file.read().decode('UTF-8')
-        # setup a stream which is when we loop through each line we are able to handle a data in a stream
-        io_string = io.StringIO(data_set)
-        next(io_string)
-        for column in csv.reader(io_string, delimiter=',', quotechar="|"):
-            try:
-                _subject, created = Subject.objects.update_or_create(name=column[6])
-                _book, created = Book.objects.update_or_create(
-                    title=column[0],
-                    publisher=column[1],
-                    availability=column[2],
-                    year=column[3],
-                    author=column[4],
-                    location=column[5],
-                    subject=_subject,
-                )
-                _book.save()
-                
-            except IntegrityError as e: 
-                messages.warning(request, f"Duplicate entry, Please don't import an already existing Entity Name or Admin email (book title)!")
-                return HttpResponseRedirect(request.path_info)
-            except Exception as e:
-                error = str(e)
-                messages.warning(request, f"{error}")
-                return HttpResponseRedirect(request.path_info)
-
-    context = {'books': books}
-    return render(request, 'ucclms/view-books.html', context)
-
-
 
 @login_required(login_url='login')
 def viewBooks(request):
@@ -516,6 +476,14 @@ def StolenBooks(request):
     return render(request, 'ucclms/stolen-books.html', context)
 
 
+
+
+@login_required(login_url='login')
+def viewSubjectDet(request, *args, **kwargs):
+    subject = get_object_or_404(Subject, pk=kwargs["id"])
+    books = Book.objects.filter(subject=subject).order_by('-id')
+    context = {'books': books}
+    return render(request, 'ucclms/view-book-cat.html', context)
 
 
 

@@ -18,6 +18,7 @@ urlpatterns = [
     path('edit-subject/<str:pk>', views.editSubject, name='edit-subject'),
     path('delete-book/<str:pk>', views.deleteBook, name='delete-book'),
     path('delete-subject/<int:id>', views.deleteSubject, name='delete-subject'),
+    path('subject-cat-info/<int:id>', views.viewSubjectDet, name='subject-cat-info'),
     path('add-stolen-book/<int:id>', views.addStolenBook, name='add-stolen-book'),
     path('view-books/', views.viewBooks, name='view-books'),
     path('view-subjects/', views.viewSubject, name='view-subjects'),

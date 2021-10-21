@@ -7,7 +7,8 @@
     <form action="" method="POST" class="form mt-3 p-4 bg-dark sign-up-form">
         {% csrf_token %}
         <legend class="text-center">Edit book details</legend>
-        {{form.as_p}}
+        {{form|crispy}}
+        <br>
         <div class="lower text-center">
             <input type="submit" class="btn mb-3 btn-primary" name="edit user" value="Save">
             <a href="{% url 'view-books' %}" class="btn mb-3 btn-danger" >Go back</a>
