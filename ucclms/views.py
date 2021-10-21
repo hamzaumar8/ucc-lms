@@ -363,7 +363,8 @@ def deleteSubject(request, *args, **kwargs):
 def addStolenBook(request, *args, **kwargs):
     book_rec = get_object_or_404(BookRecord, pk=kwargs["id"])
     book = Book.objects.filter(id=book_rec.book.id)
-    no_stolen = book.no_stolen + 1
+    book_st = book.first().no_stolen
+    no_stolen = book_st + 1
     book = book.update(is_stolen=True, no_stolen=no_stolen)
     messages.success(request, f'{book} has been recorded  Stolen')
     return redirect(reverse('books-not-returned'))
