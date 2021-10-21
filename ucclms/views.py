@@ -6,6 +6,7 @@ from django.contrib.messages.api import error
 from django.db import IntegrityError
 from django.forms.forms import Form
 from django.urls import reverse
+from django.conf import settings
 from django.db.models import Count, Q
 from django.utils.crypto import get_random_string
 from django.http import request, HttpResponseRedirect
@@ -13,12 +14,32 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
 from django.contrib import messages
+from django.template.loader import get_template
 from .forms import AddSubjectForm, BorrowBookForm, CreateStudentForm, CreateUserForm, AddBookForm, AlterBookRecord, EditStudentProfile, ProfileUserUpdateForm, RecommendBookForm, BorrowBookForm
 from .models import *
 from .decorators import unauthenticated_user, allowed_users
 from datetime import datetime, timedelta
 
+
+
+
+def signup_invite_email(request, email):
+    url = 'request.build_absolute_uri(reverse("dashboard:signup", kwargs={"token": generate_signup_token(email)}))'
+    html = get_template("ucclms/emails/users.html")
+    content = html.render({"url": url})
+    msg = "Kindly visit %s to create an account" % url
+    send_mail(
+        "Login Details for UCC LMS Portal",
+        msg,
+        'ucclms@gmail.com',
+        [email],
+        fail_silently=False,
+        html_message=content,
+    )
+
+    
 
 def home(request):
     return render(request, 'ucclms/home.html')
@@ -180,8 +201,11 @@ def viewUsers(request):
                         user_profile.index_number = column[1]
                         user_profile.save()
 
+                        # send mail
+                        signup_invite_email(request, column[4])
+                        
                     except IntegrityError as e: 
-                        messages.warning(request, f"Duplicate entry, Please don't import an already existing Entity Name or Admin email (entity_name)!")
+                        messages.warning(request, f"Duplicate entry, Please don't import an already existing User Index Number And Email")
                         return HttpResponseRedirect(request.path_info)
                     except Exception as e:
                         error = str(e)
