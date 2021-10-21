@@ -8,6 +8,10 @@
         {% csrf_token %}
         <legend class="text-center">Create a new user account</legend>
         <div class="form-group my-4">
+            Index Number / Staff ID
+            {{sform.index_number}}
+        </div>
+        <div class="form-group my-4">
             {{form.username.label}}
             {{form.username}}
         </div>

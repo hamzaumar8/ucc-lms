@@ -84,7 +84,6 @@ def signUp(request):
         sform = ProfileUserUpdateForm(request.POST)
         form = CreateUserForm(request.POST)
         if form.is_valid():
-            print(sform)
             user = form.save()
             username = form.cleaned_data.get('username')
             group = Group.objects.get(name='student')
@@ -101,17 +100,22 @@ def signUp(request):
 
 @allowed_users(allowed_roles=['admin'])
 def createUser(request):
+    sform = ProfileUserUpdateForm()
     form = CreateUserForm()
     if request.method == 'POST':
+        sform = ProfileUserUpdateForm(request.POST)
         form = CreateUserForm(request.POST)
         if form.is_valid():
             user = form.save()
             username = form.cleaned_data.get('username')
             group = Group.objects.get(name='student')
             user.groups.add(group)
+            user_profile = user.student
+            user_profile.index_number = sform.cleaned_data['index_number']
+            user_profile.save()
             messages.success(request, f'{username} has been added successfully')
             return redirect('view-users')
-    context = {'form': form}
+    context = {'form': form, 'sform': sform}
     return render(request, 'ucclms/create-user.html', context)
 
 
