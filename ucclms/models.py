@@ -21,6 +21,7 @@ class Book(models.Model):
     author = models.CharField(max_length = 255, blank=True, null=True)
     location = models.CharField(max_length = 255, blank=True, null=True)
     subject = models.ForeignKey(Subject, on_delete=models.SET_NULL, null=True, blank=True, related_name='booksubject')
+    is_stolen = models.BooleanField(default=False)
     
     def __str__(self):
         return self.title

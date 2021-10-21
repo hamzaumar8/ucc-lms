@@ -5,8 +5,9 @@ from django.contrib.auth.models import User, Group
 from django.contrib.messages.api import error
 from django.db import IntegrityError
 from django.forms.forms import Form
+from django.urls import reverse
 from django.http import request, HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -293,6 +294,14 @@ def deleteBook(request, pk):
         return redirect('view-books')
     context = {'book': book}
     return render(request, 'ucclms/delete-book.html', context)
+
+
+@allowed_users(allowed_roles=['admin'])
+def addStolenBook(request, *args, **kwargs):
+    book_rec = get_object_or_404(BookRecord, pk=kwargs["id"])
+    book = Book.objects.filter(id=book_rec.book.id).update(is_stolen=True)
+    messages.success(request, f'{book} has been recorded  Stolen')
+    return redirect(reverse('books-not-returned'))
 
 
 @login_required(login_url='login')

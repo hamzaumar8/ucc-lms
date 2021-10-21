@@ -5,8 +5,8 @@
 {% block content %}
 <div class="dashboard admin-dashboard">
 <div class="rowe">
-  <nav id="sideMenu" class="sideMenu closed bg-light">
-    <div class="menu-toggle btn btn-dark">
+  <nav id="sideMenu" class="sideMenu  bg-light">
+    <div class="menu-toggle btn btn-dark ">
       <i class="fas fa-bars"></i>
     </div>
     <div class="">
@@ -26,6 +26,12 @@
         <li class="nav-ite mb-2">
           <a class="nav-link" href="{% url 'view-books'%}">
             <i class="fas fa-book"></i>
+            <span> Books Categories (Subject)</span>
+          </a>
+        </li>
+        <li class="nav-ite mb-2">
+          <a class="nav-link" href="{% url 'view-books'%}">
+            <i class="fas fa-book"></i>
             <span>All Books</span>
           </a>
         </li>
@@ -33,6 +39,12 @@
           <a class="nav-link" href="{% url 'book-records' %}">
             <i class="fas fa-book-reader"></i>
             <span>Issue/Return Requests</span>
+          </a>
+        </li>
+        <li class="nav-ite mb-2">
+          <a class="nav-link" href="{% url 'books-not-returned' %}">
+            <i class="fas fa-book-reader"></i>
+            <span>Books Not Returned</span>
           </a>
         </li>
         <li class="nav-ite mb-2">
