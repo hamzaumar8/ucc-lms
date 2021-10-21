@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
-from .models import Book, BookRecord, Recommendation, Student
+from .models import Book, BookRecord, Recommendation, Student, Subject
 from django.contrib.auth.models import User
 
 
@@ -14,6 +14,11 @@ class CreateUserForm(UserCreationForm):
 class AddBookForm(ModelForm):
     class Meta:
         model = Book
+        fields = '__all__'
+
+class AddSubjectForm(ModelForm):
+    class Meta:
+        model = Subject
         fields = '__all__'
 
 class BorrowBookForm(ModelForm):

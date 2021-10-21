@@ -6,13 +6,14 @@ from django.contrib.messages.api import error
 from django.db import IntegrityError
 from django.forms.forms import Form
 from django.urls import reverse
+from django.db.models import Count, Q
 from django.http import request, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import BorrowBookForm, CreateStudentForm, CreateUserForm, AddBookForm, AlterBookRecord, EditStudentProfile, RecommendBookForm, BorrowBookForm
+from .forms import AddSubjectForm, BorrowBookForm, CreateStudentForm, CreateUserForm, AddBookForm, AlterBookRecord, EditStudentProfile, RecommendBookForm, BorrowBookForm
 from .models import *
 from .decorators import unauthenticated_user, allowed_users
 from datetime import datetime, timedelta
@@ -189,6 +190,53 @@ def viewBooks(request):
     return render(request, 'ucclms/view-books.html', context)
 
 
+
+@login_required(login_url='login')
+def viewBooks(request):
+    books = Book.objects.order_by('-id')
+    if request.method == "POST":
+        csv_file = request.FILES['file']
+        # let's check if it is a csv file
+        if not csv_file.name.endswith('.csv'):
+            messages.error(request, 'THIS IS NOT A CSV FILE')
+        if csv_file.size > 33554432:
+            messages.error(request, 'The size must no br more then 32GB.')
+        data_set = csv_file.read().decode('UTF-8')
+        # setup a stream which is when we loop through each line we are able to handle a data in a stream
+        io_string = io.StringIO(data_set)
+        next(io_string)
+        for column in csv.reader(io_string, delimiter=',', quotechar="|"):
+            try:
+                _subject, created = Subject.objects.update_or_create(name=column[6])
+                _book, created = Book.objects.update_or_create(
+                    title=column[0],
+                    publisher=column[1],
+                    availability=column[2],
+                    year=column[3],
+                    author=column[4],
+                    location=column[5],
+                    subject=_subject,
+                )
+                _book.save()
+                
+            except IntegrityError as e: 
+                messages.warning(request, f"Duplicate entry, Please don't import an already existing Entity Name or Admin email (book title)!")
+                return HttpResponseRedirect(request.path_info)
+            except Exception as e:
+                error = str(e)
+                messages.warning(request, f"{error}")
+                return HttpResponseRedirect(request.path_info)
+
+    context = {'books': books}
+    return render(request, 'ucclms/view-books.html', context)
+
+
+@login_required(login_url='login')
+def viewSubject(request):
+    subjects = Subject.objects.order_by('-id').annotate(num_subject=Count('booksubject', distinct=True))
+    context = {'subjects': subjects}
+    return render(request, 'ucclms/view-subjects.html', context)
+
 # @allowed_users(allowed_roles=['admin'])
 # def ImportUpload(request):
 #     entity = models.Entity.objects.filter(~Q(admin_email="info@onestepplabs.com"))
@@ -269,6 +317,18 @@ def addBook(request):
 
 
 @allowed_users(allowed_roles=['admin'])
+def addSubject(request):
+    form = AddSubjectForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Subject has been added successfully')
+            return redirect('view-subjects')
+    context = {'form': form}
+    return render(request, 'ucclms/add-subject.html', context)
+
+
+@allowed_users(allowed_roles=['admin'])
 def editBook(request, pk):
     book = Book.objects.get(id=pk)
     form = AddBookForm(instance=book)
@@ -294,6 +354,14 @@ def deleteBook(request, pk):
         return redirect('view-books')
     context = {'book': book}
     return render(request, 'ucclms/delete-book.html', context)
+
+
+@allowed_users(allowed_roles=['admin'])
+def deleteSubject(request, *args, **kwargs):
+    subject = get_object_or_404(Subject, pk=kwargs["id"])
+    subject.delete()
+    messages.success(request, f'{subject} has been deleted  successfully')
+    return redirect(reverse('books-not-returned'))
 
 
 @allowed_users(allowed_roles=['admin'])
