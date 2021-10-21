@@ -88,13 +88,13 @@ def signOut(request):
 @allowed_users(allowed_roles=['student'])
 def studentDashboard(request):
     student = Student.objects.get(user=request.user)
-    context = {'student': student}
+    context = {'dash_title':'','student': student}
     return render(request, 'ucclms/student-dashboard.html', context)
 
 @allowed_users(allowed_roles=['admin'])
 def adminDashboard(request):
     admin = Administrator.objects.get(user=request.user)
-    context = {'admin': admin}
+    context = {'dash_title':'Dashboard','admin': admin}
     return render(request, 'ucclms/admin-dashboard.html', context)
 
 
@@ -166,7 +166,7 @@ def editUser(request, pk):
             messages.success(request, f'{person} has been updated')
             return redirect('view-users')
         
-    context = {'form': form}
+    context = {'dash_title':'Edit User','form': form}
     return render(request, 'ucclms/edit-user.html', context)
 
 from django.contrib.auth.hashers import make_password
@@ -217,7 +217,7 @@ def viewUsers(request):
         else:
             messages.error(request, 'THIS IS NOT A CSV FILE')
     
-    context = {'users': users}
+    context = {'dash_title':'Users','users': users}
     return render(request, 'ucclms/view-users.html', context)
 
 
@@ -277,7 +277,7 @@ def viewBooks(request):
                 messages.warning(request, f"{error}")
                 return HttpResponseRedirect(request.path_info)
 
-    context = {'books': books}
+    context = {'dash_title':'All Books','books': books}
     return render(request, 'ucclms/view-books.html', context)
 
 
@@ -295,7 +295,7 @@ def viewSubject(request):
 @login_required(login_url='login')
 def recommendations(request):
     recommendations = Recommendation.objects.all()
-    context = {'recommendations': recommendations}
+    context = {'dash_title':'Recommendations','recommendations': recommendations}
     return render(request, 'ucclms/recommendations.html', context)
 
 
@@ -308,7 +308,7 @@ def addBook(request):
             form.save()
             messages.success(request, f'Book has been added successfully')
             return redirect('view-books')
-    context = {'form': form}
+    context = {'dash_title':'Add New Book','form': form}
     return render(request, 'ucclms/add-book.html', context)
 
 
@@ -320,7 +320,7 @@ def addSubject(request):
             form.save()
             messages.success(request, f'Subject has been added successfully')
             return redirect('view-subjects')
-    context = {'form': form}
+    context = {'dash_title':'Add Subject Category','form': form}
     return render(request, 'ucclms/add-subject.html', context)
 
 
@@ -336,7 +336,7 @@ def editBook(request, pk):
             messages.success(request, f'{book} has been updated')
             return redirect('view-books')
         
-    context = {'form': form}
+    context = {'dash_title':'Edit Book','form': form}
     return render(request, 'ucclms/edit-book.html', context)
 
 @allowed_users(allowed_roles=['admin'])
@@ -351,7 +351,7 @@ def editSubject(request, pk):
             messages.success(request, f'{book} has been updated')
             return redirect('view-subjects')
         
-    context = {'form': form}
+    context = {'dash_title':'Edit Subject Category','form': form}
     return render(request, 'ucclms/edit-subject.html', context)
 
 
@@ -389,13 +389,13 @@ def addStolenBook(request, *args, **kwargs):
 @login_required(login_url='login')
 def bookRecords(request):
     book_records = BookRecord.objects.all()
-    context = {'book_records': book_records}
+    context = {'dash_title':'Book Records','book_records': book_records}
     return render(request, 'ucclms/book-records.html', context)
 
 @login_required(login_url='login')
 def studentBorrowedBooks(request):
     book_records = BookRecord.objects.filter(user=request.user)
-    context = {'book_records': book_records}
+    context = {'dash_title':'Borrowed Books','book_records': book_records}
     return render(request, 'ucclms/student-borrowed-books.html', context)
 
 
@@ -418,7 +418,7 @@ def recommendBook(request):
             form.save()
             messages.success(request, 'Book has been recommended')
             return redirect('student-dashboard')
-    context = {'form': form}
+    context = {'dash_title':'Recomend Book','form': form}
     return render(request, 'ucclms/recommend-book.html', context)
 
 def borrowBook(request, pk):
@@ -438,7 +438,7 @@ def borrowBook(request, pk):
             messages.success(request, f'Book requested. You can pick up your book "{book.title}" at Sam Jonah Library at "{book.location}"')
             return redirect('student-dashboard')
         
-    context = {'form': form}
+    context = {'dash_title':'Borrow A Book','form': form}
     return render(request, 'ucclms/borrow-book.html', context)
 
 

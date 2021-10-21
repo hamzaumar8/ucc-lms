@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/sign-up.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    
+    <link rel="stylesheet" type="text/css" href="{% static '/css/dashstyle.css' %}">
+
+    <link href="{% static 'libs/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'libs/datatables/responsive.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'libs/datatables/buttons.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'libs/datatables/select.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
+    <title>UCC LMS | {% block title%}{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+
+    <link rel="stylesheet" href="{% static 'vendors/chartjs/Chart.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'vendors/perfect-scrollbar/perfect-scrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+</head>
+
+<body>
+
+   
+
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert  alert-{{ message.tags }} alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true" style="margin-right:30px;">&times;</span>
+                    </button>
+                    {{ message }}
+                </div>
+                {% endfor %}
+            
+                {% endif %}
+                {% block content %}
+                {% endblock %}
+
+
+    <script src="/static/js/jquery-3.5.1.min.js"></script>
+    <script src="/static/js/popper.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+
+    <script src="{% static 'libs/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'libs/datatables/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'libs/datatables/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'libs/datatables/responsive.bootstrap4.min.js' %}"></script>
+
+    <script src="{% static 'libs/datatables/dataTables.buttons.min.js' %}"></script>
+    <script src="{% static 'libs/datatables/buttons.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'libs/datatables/buttons.html5.min.js' %}"></script>
+    <script src="{% static 'libs/datatables/buttons.flash.min.js' %}"></script>
+    <script src="{% static 'libs/datatables/buttons.print.min.js' %}"></script>
+    <script src="{% static 'libs/datatables/buttons.pdfmake.min.js' %}"></script>
+    <script src="{% static 'libs/datatables/vfs_fonts.js' %}"></script>
+    <script src="{% static 'libs/datatables/jszip.min.js' %}"></script>
+
+    <script src="{% static 'libs/datatables/dataTables.keyTable.min.js' %}"></script>
+    <script src="{% static 'libs/datatables/dataTables.select.min.js' %}"></script>
+    <script src="{% static 'libs/datatables/init.js' %}"></script>
+
+
+
+    <script src="{% static 'js/feather-icons/feather.min.js' %}"></script>
+    <script src="{% static 'vendors/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+
+    <script src="{% static 'vendors/chartjs/Chart.min.js' %}"></script>
+    <script src="{% static 'vendors/apexcharts/apexcharts.min.js' %}"></script>
+    <script src="{% static 'js/pages/dashboard.js' %}"></script>
+
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>

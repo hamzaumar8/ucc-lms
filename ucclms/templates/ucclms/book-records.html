@@ -7,16 +7,17 @@
         </div>
         <div class="card-body">
             <table class='table' id="table_id">
-                <tr>
-                    <td>ID</td>
-                    <td>User</td>
-                    <td>Book</td>
-                    <td>Issue Date</td>
-                    <td>Due Date</td>
-                    <td>Return Date</td>
-                    <td>Penalty (Ghc)</td>
-                    <td></td>
-                </tr>
+                <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>User</td>
+                        <td>Book</td>
+                        <td>Issue Date</td>
+                        <td>Due Date</td>
+                        <td>Return Date</td>
+                        <td>Penalty (Ghc)</td>
+                        <td></td>
+                    </tr>
                 </thead>
                 <tbody>
                     {% for i in book_records %}
