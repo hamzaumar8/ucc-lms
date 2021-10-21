@@ -1,0 +1,10 @@
+<ul id="social">
+                        <li><a href="https://www.facebook.com/capevars/" target="_blank"><i class="fa fa-facebook">‌</i></a></li>
+		        <li><a href="https://business.google.com/u/1/dashboard/l/02923863611512028745?hl=en" target="_blank"><i class="fa fa-google-plus">‌</i></a></li>
+		        <li><a href="https://www.linkedin.com/edu/university-of-cape-coast-12825" target="_blank">‌<i class="fa fa-linkedin">‌</i></a></li>
+		        <li><a href="https://www.youtube.com/user/capevars" target="_blank"><i class="fa fa-youtube">‌</i></a></li>
+		        <li><a href="https://twitter.com/CapeVars" target="_blank"><i class="fa fa-twitter">‌</i></a></li>
+                        <li><a href="https://en.wikipedia.org/wiki/University_of_Cape_Coast" target="_blank"><i class="fa fa-wikipedia-w">‌</i></a></li>
+                        <li><a href="https://www.flickr.com/photos/capevars" target="_blank"><i class="fa fa-flickr">‌</i></a></li>
+                        <li><a href="https://www.instagram.com/capevars" target="_blank"><i class="fa fa-instagram">‌</i></a></li>
+		</ul>

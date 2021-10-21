@@ -104,7 +104,7 @@ def signUp(request):
     if request.method == 'POST':
         sform = ProfileUserUpdateForm(request.POST)
         form = CreateUserForm(request.POST)
-        if form.is_valid():
+        if form.is_valid() and sform.is_valid():
             user = form.save()
             username = form.cleaned_data.get('username')
             group = Group.objects.get(name='student')
@@ -126,7 +126,7 @@ def createUser(request):
     if request.method == 'POST':
         sform = ProfileUserUpdateForm(request.POST)
         form = CreateUserForm(request.POST)
-        if form.is_valid():
+        if form.is_valid() and sform.is_valid():
             user = form.save()
             username = form.cleaned_data.get('username')
             group = Group.objects.get(name='student')

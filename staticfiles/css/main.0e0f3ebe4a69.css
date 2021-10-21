@@ -1,0 +1,409 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: rgb(241, 241, 241);
+}
+
+ul{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+nav.navbar{
+    height: 10vh;
+}
+nav.navbar a{
+    color: #fff;
+}
+
+nav .logo{
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.admin-dashboard a{
+    color: #fff;
+}
+
+.admin-dashboard .sidebar{
+    height: 90vh;
+    background: rgb(29, 37, 39) !important;    
+}
+
+.user-profile{
+    display: flex;
+    width: 70%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+    
+.user-profile .profile-pic{
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    max-width: 100%;
+    margin: auto;
+    overflow: hidden;
+    background-color: black;
+    margin-bottom: 2rem;
+}
+
+.user-profile img{
+    width: 300px;
+    height: 300px;
+    object-fit: fill;
+}
+
+.user-profile .profile-detail{
+    display: flex;
+    flex-direction: column;
+}
+.user-profile .profile-detail .detail-title{
+    font-weight: bold;
+}
+
+.admin-dashboard main.container{
+    display: flex;
+}
+
+.admin-dashboard main.container .aside{
+    width: 30%;
+    padding: 1rem;
+    background-color: rgb(226, 226, 226);
+}
+
+.admin-dashboard main.container .aside-item{
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.admin-dashboard main.container .search.aside-item{
+    margin-top: 3rem;
+}
+
+.admin-dashboard main.container .aside .aside-item strong{
+    background: rgb(50, 137, 219);
+    padding: 10px;
+    color: white;
+    width: 100%;
+}
+
+.admin-dashboard main.container .aside ul{
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+}
+
+.admin-dashboard main.container .aside ul li{
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-dashboard main.container .aside ul li:not(:last-child){
+    border-bottom: 1px solid grey;
+}
+
+.admin-dashboard main.container .aside ul li a{
+    color: darkblue;
+}
+
+.admin-dashboard main.container .aside ul a{
+    color: black;
+}
+
+.admin-dashboard main.container .aside form.search-pdfDrive{
+    margin-top: 1.5rem;
+}
+
+.admin-dashboard main.container .aside form .input-group{
+    margin: 1.5rem 0;
+}
+
+.admin-dashboard main.container .aside form .input-group input{
+    position: relative;
+}
+
+.admin-dashboard main.container .aside .input-group i{
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    z-index: 100;
+}
+
+.login-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login .left, .login .right{
+    flex: 1;
+}
+
+.login .left{
+    background: center center/cover url(/img/ucc2.jpg);
+    height: 100%;
+    color: white;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: left;
+    position: relative;
+}
+
+.login .right{
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(0, 49, 49);
+}
+
+.login .right form{
+    background-color: rgb(0, 49, 49) !important;
+}
+
+.login .left h1 span{
+    font-weight: bold;
+}
+
+.login .left h1, .login .left p, .login .left a{
+    z-index: 100;
+}
+
+.login .left a{
+    width: fit-content;
+    display: inline-block;
+}
+
+.login .bg-overlay{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.login .right .form-image{
+    background-color: white;
+    padding: 20px;
+    height: 150px;
+    width: 150px;
+    margin: auto;
+    border-radius: 30px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.login .right .form-image img{
+    width: 100%;
+    height: 100%;
+}
+
+.signup-wrapper{
+    background: center center/cover url(/img/ucc1.jpg);
+    height: 100vh;
+    padding: 2rem 0;
+    position: relative;
+}
+.signup-wrapper .bg-overlay{
+    background: rgba(0, 0, 0, 0.493);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+
+.signup-wrapper .container.sign-up form.form{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    background: rgb(0, 17, 11) !important;
+}
+
+.home-wrapper nav.home-navbar{
+    background: white;
+    height: 10vh;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.home-wrapper nav.home-navbar .container-fluid{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.home-wrapper nav.home-navbar .nav-wrapper ul{
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.home-wrapper nav.home-navbar .nav-wrapper ul li{
+    padding: 0 10px;
+}
+
+.home-wrapper nav.home-navbar .nav-wrapper .logo a{
+    color: black;
+}
+
+.home-wrapper nav.home-navbar .nav-wrapper ul li a{
+    color: black;
+}
+
+.home-wrapper .hero{
+    margin-top: 10vh;
+}
+
+.home-wrapper .carousel-wrapper img{
+    height: 500px;
+}
+.home-wrapper .carousel-wrapper .carousel-caption{
+    background: rgba(0, 0, 0, 0.726);
+    width: 100%;
+    left: 0;
+    bottom: 0;
+}
+
+.home-wrapper .carousel-wrapper .carousel-caption p{
+    width: 80%;
+    margin: 10px auto;
+}
+
+.home-wrapper section.gallery img{
+    width: 100%;
+    height: 160px;
+}
+
+.home-wrapper footer{
+    background: rgb(0, 39, 51);
+    color: white;
+}
+
+.home-wrapper footer a{
+    color: white;
+    display: block !important;
+}
+
+.home-wrapper footer strong{
+    color: rgb(248, 178, 86);
+}
+
+.home-wrapper footer li.text-bold{
+    font-weight: bold;
+}
+
+.home-wrapper footer input, .home-wrapper footer textarea{
+    margin: 10px 0;
+}
+
+.home-wrapper footer strong.copy{
+    margin-top: 50px;
+    text-align: center;
+    margin: auto;
+}
+
+.home-wrapper footer ul{
+    padding: 0;
+}
+
+.home-wrapper footer ul i{
+    width: 20px;
+}
+
+section.gallery p{
+    text-align: center;
+}
+
+section.partners img{
+    height: 60px;
+}
+
+.container.borrow-book select#id_user, .container.borrow-book select#id_book{
+    pointer-events: none;
+}
+
+.container.borrow-book #id_user,
+.container.borrow-book #id_date_of_issue,
+.container.borrow-book #id_date_of_return,
+.container.borrow-book #id_due_date,
+.container.borrow-book #id_dues,
+.container.borrow-book #id_renewals_left,
+.container.borrow-book label
+{
+    display: none;
+}
+
+
+@media screen and (max-width:760px){
+    .login{
+        flex-direction: column;
+        background-color: rgb(0, 49, 49);
+    }
+    .login .left{
+        flex-direction: column;
+    }
+    
+    .login .right .form-image{
+        width: 100px;
+        height: 100px;
+    }
+    
+    .carousel-wrapper img{
+        height: 300px;
+    }
+    
+    .admin-dashboard main.container{
+        width: 500px !important;
+        margin: 0 auto;
+        margin-top: 5rem;
+        justify-content: center;
+    }
+    
+    .logo{
+        transform: scale(0.8);
+    }
+    
+    nav.navbar .right{
+        display: none;
+    }
+    
+    body{
+        overflow-x: auto;
+    }
+    
+}
+
+
+@media screen and (max-width:600px){
+    .admin-dashboard main.container{
+        width: 300px !important;
+        margin: 0 auto;
+        margin-top: 5rem;
+        justify-content: center;
+    }
+    
+}
