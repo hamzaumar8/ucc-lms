@@ -446,7 +446,7 @@ def studentViewBooks(request):
     books = Book.objects.all()
     if request.method == 'POST':
         book=request.post
-    context = {'books': books}
+    context = {'dash_title':'Books','books': books}
     return render(request, 'ucclms/student-view-books.html', context)    
 
 
@@ -465,7 +465,7 @@ def editProfile(request, pk):
             messages.success(request, f'Your Profile has been updated!')
             return redirect('edit-profile', pk=pk)
 
-    context = {'form': form, 'person': student}
+    context = {'dash_title':'Edit Profile','form': form, 'person': student}
     return render(request, 'ucclms/edit-profile.html', context)
 
 @allowed_users(allowed_roles=['admin'])
@@ -492,14 +492,14 @@ def editBookRecord(request, pk):
 @allowed_users(allowed_roles=['admin'])
 def booksNotreturned(request):
     book_records = BookRecord.objects.filter(date_of_return=None)
-    context = {'book_records': book_records}
+    context = {'dash_title':'Books Not Returned','book_records': book_records}
     return render(request, 'ucclms/student-booksnot.html', context)
 
 
 @allowed_users(allowed_roles=['admin'])
 def StolenBooks(request):
     stolen_books = Book.objects.filter(is_stolen=True)
-    context = {'stolen_books': stolen_books}
+    context = {'dash_title':'Stolen Books','stolen_books': stolen_books}
     return render(request, 'ucclms/stolen-books.html', context)
 
 
