@@ -7,6 +7,7 @@ from django.db import IntegrityError
 from django.forms.forms import Form
 from django.urls import reverse
 from django.db.models import Count, Q
+from django.utils.crypto import get_random_string
 from django.http import request, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.forms import UserCreationForm
@@ -146,11 +147,51 @@ def editUser(request, pk):
     context = {'form': form}
     return render(request, 'ucclms/edit-user.html', context)
 
+from django.contrib.auth.hashers import make_password
 
 @allowed_users(allowed_roles=['admin'])
 @login_required(login_url='login')
 def viewUsers(request):
-    users = User.objects.all()
+    users = User.objects.order_by('-id')
+    
+    if request.method == "POST":
+        csv_file = request.FILES['file']
+
+        if csv_file.name.endswith('.csv'):
+            if csv_file.size < 33554432:
+                data_set = csv_file.read().decode('UTF-8')
+
+                io_string = io.StringIO(data_set)
+                next(io_string)
+                csv_read = csv.reader(io_string, delimiter=',', quotechar="|")
+                for column in csv_read:
+                    try:
+                        generated_pass = get_random_string(length=8)
+                        user = User.objects.create(
+                            username= column[1],
+                            first_name= column[2],
+                            last_name= column[3],
+                            email= column[4],
+                            password= make_password(generated_pass)
+                        )
+                        group = Group.objects.get(name='student')
+                        user.groups.add(group)
+                        user_profile = user.student
+                        user_profile.index_number = column[1]
+                        user_profile.save()
+
+                    except IntegrityError as e: 
+                        messages.warning(request, f"Duplicate entry, Please don't import an already existing Entity Name or Admin email (entity_name)!")
+                        return HttpResponseRedirect(request.path_info)
+                    except Exception as e:
+                        error = str(e)
+                        messages.warning(request, f"{error}")
+                        return HttpResponseRedirect(request.path_info)
+            else:
+                messages.error(request, 'The size must no br more then 32GB.')
+        else:
+            messages.error(request, 'THIS IS NOT A CSV FILE')
+    
     context = {'users': users}
     return render(request, 'ucclms/view-users.html', context)
 
@@ -206,60 +247,6 @@ def viewSubject(request):
     subjects = Subject.objects.order_by('-id').annotate(num_subject=Count('booksubject', distinct=True))
     context = {'subjects': subjects}
     return render(request, 'ucclms/view-subjects.html', context)
-
-# @allowed_users(allowed_roles=['admin'])
-# def ImportUpload(request):
-#     entity = models.Entity.objects.filter(~Q(admin_email="info@onestepplabs.com"))
-#     if request.method == "POST":
-#         csv_file = request.FILES['file']
-#         # let's check if it is a csv file
-#         if not csv_file.name.endswith('.csv'):
-#             messages.error(request, 'THIS IS NOT A CSV FILE')
-#         if csv_file.size > 33554432:
-#             messages.error(request, 'The size must no br more then 32GB.')
-#         data_set = csv_file.read().decode('UTF-8')
-#         # setup a stream which is when we loop through each line we are able to handle a data in a stream
-#         io_string = io.StringIO(data_set)
-#         next(io_string)
-#         for column in csv.reader(io_string, delimiter=',', quotechar="|"):
-
-#             try:
-#                 _entity, created = models.Entity.objects.update_or_create(
-#                     name=column[0],
-#                     region=column[1],
-#                     admin_name=column[2],
-#                     admin_email=column[3],
-#                     phone_number=column[4],
-#                 )
-#                 _userregistration, created = models.UserRegistration.objects.update_or_create(
-#                     entity=_entity,
-#                     name=column[2],
-#                     region=column[1],
-#                     email=column[3],
-#                     phone_number=column[4],
-#                     is_staff=True 
-#                 )
-#                 # send mail
-#                 signup_invite_email(request, column[3])
-#             except IntegrityError as e: 
-#                 messages.warning(request, f"Duplicate entry, Please don't import an already existing Entity Name or Admin email (entity_name)!")
-#                 return HttpResponseRedirect(request.path_info)
-#             except Exception as e:
-#                 error = str(e)
-#                 messages.warning(request, f"{error}")
-#                 return HttpResponseRedirect(request.path_info)
-
-
-#         messages.success(
-#             request, f"Entity has been imported and a registration invite email has been sent this email!"
-#         )
-#         return redirect('dashboard:entities')
-#     context = {
-#         "dash_title": "Imports",
-#         "entities": entity,
-#     }
-    
-#     return render(request, "dashboard/imports.html", context)
 
 
 

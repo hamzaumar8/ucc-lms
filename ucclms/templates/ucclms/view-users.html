@@ -4,15 +4,30 @@
 <div class="container users mt-5">
     <a href="{% url 'admin-dashboard' %}" class="btn btn-dark mb-2"><i class="fas fa-home"></i> Home</a>
     <a href="{% url 'create-user' %}" class="btn btn-secondary align-right mb-2"><i class="fas fa-user-plus"></i> Add user</a>
-    {% for message in messages %}
-    <br>
-    <small id="messages" class="bg-warning p-1">
-        {{message}}
-    </small>
-    <br>
-    {% endfor %}
     
-    <table class=" table  dt-responsive nowrap table-striped p-3 mt-2 table-dark table-sm" id="basic-datatable">
+    <div class="col-12" >   
+        <div class="card" style="margin: 20px 0 40px;">
+            <div class="card-body">
+                <div class=" d-flex justify-content-between">
+                    <h4>Import User's File</h4>
+                    <a href="#"  class="btn btn-success waves-effect waves-light"><i class="mdi mdi-download mr-1"></i> Download Sample File</a>
+                </div>
+                <br>
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="file" class="form-control" id="example-fileinput" name="file" required>
+                    <p>CSV File. Max File Size : 32MB</p>
+                    <div class="button-list d-flex justify-content-between">
+                        <div></div>
+                        <button type="submit" class="btn btn-primary waves-effect waves-light"><i class="mdi mdi-upload mr-1"></i> Import</button>
+                       
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <table class=" table  dt-responsive nowrap table-striped p-3 mt-2 table-dark table-sm" id="table_id">
         <thead>
             <tr>
                 <td></td>
