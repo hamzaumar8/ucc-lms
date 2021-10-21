@@ -392,7 +392,9 @@ def deleteSubject(request, *args, **kwargs):
 @allowed_users(allowed_roles=['admin'])
 def addStolenBook(request, *args, **kwargs):
     book_rec = get_object_or_404(BookRecord, pk=kwargs["id"])
-    book = Book.objects.filter(id=book_rec.book.id).update(is_stolen=True)
+    book = Book.objects.filter(id=book_rec.book.id)
+    no_stolen = book.no_stolen + 1
+    book = book.update(is_stolen=True, no_stolen=no_stolen)
     messages.success(request, f'{book} has been recorded  Stolen')
     return redirect(reverse('books-not-returned'))
 
@@ -498,21 +500,20 @@ def editBookRecord(request, pk):
 
 
 
-# weedseed
-from django.db.models import Q
-
-
 
 
 @allowed_users(allowed_roles=['admin'])
 def booksNotreturned(request):
-    # today = datetime.datetime.today()
-    # import datetime
-    #valid_until may be empty
-    # book_records = BookRecord.objects.filter(Q(due_date__lte=today)|Q(valid_until=None))
     book_records = BookRecord.objects.filter(date_of_return=None)
     context = {'book_records': book_records}
     return render(request, 'ucclms/student-booksnot.html', context)
+
+
+@allowed_users(allowed_roles=['admin'])
+def StolenBooks(request):
+    stolen_books = Book.objects.filter(is_stolen=True)
+    context = {'stolen_books': stolen_books}
+    return render(request, 'ucclms/stolen-books.html', context)
 
 
 
