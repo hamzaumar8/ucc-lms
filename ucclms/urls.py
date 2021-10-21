@@ -37,4 +37,7 @@ urlpatterns = [
     path('stolen-books/', views.StolenBooks, name='stolen-books'),
     path('recommendations/', views.recommendations, name='recommendations'),
     path('user-page/', views.userPage, name='user-page'),
+
+    # Demo Files
+    path("dowload-book-demo-file/", views.download_book_deomo_file, name="download-book-demo"),
 ]

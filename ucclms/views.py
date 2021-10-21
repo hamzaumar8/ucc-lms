@@ -1,5 +1,7 @@
 import time
+import os
 import csv, io
+from django.views.static import serve
 from django.contrib.auth import forms
 from django.contrib.auth.models import User, Group
 from django.contrib.messages.api import error
@@ -222,12 +224,19 @@ def viewUsers(request):
 def userPage(request):
     return render(request, 'ucclms/user-page.html')
 
+def download_book_deomo_file(request):
+    filepath = settings.DEMO_DOWNLOAD_CSV_FILE
+    return serve(request, os.path.basename(filepath), os.path.dirname(filepath))
 
 
 
 @login_required(login_url='login')
 def viewBooks(request):
     books = Book.objects.order_by('-id')
+    # print(os.path.dirname(os.path.realpath(__file__)))
+    # print('gr', os.path.basename(settings.DEMO_DOWNLOAD_CSV_FILE))
+    # print('gr', os.path.dirname(settings.DEMO_DOWNLOAD_CSV_FILE))
+    # print('grab', os.path.join(settings.BASE_DIR, 'static'))
     if request.method == "POST":
         csv_file = request.FILES['file']
         # let's check if it is a csv file

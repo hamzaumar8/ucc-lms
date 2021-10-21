@@ -146,3 +146,8 @@ EMAIL_HOST_PASSWORD = "yvbdactfcsfourif"
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
+
+
+if DEBUG:
+    DEMO_DOWNLOAD_CSV_FILE = '/static/csv/Book-demo.csv'
