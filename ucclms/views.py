@@ -25,11 +25,10 @@ from datetime import datetime, timedelta
 
 
 
-def signup_invite_email(request, email):
-    url = 'request.build_absolute_uri(reverse("dashboard:signup", kwargs={"token": generate_signup_token(email)}))'
+def signup_invite_email(request, email, password):
     html = get_template("ucclms/emails/users.html")
-    content = html.render({"url": url})
-    msg = "Kindly visit %s to create an account" % url
+    content = html.render({"email": email, "password": password})
+    msg = "Kindly visit %s to create an account" % email
     send_mail(
         "Login Details for UCC LMS Portal",
         msg,
@@ -202,7 +201,7 @@ def viewUsers(request):
                         user_profile.save()
 
                         # send mail
-                        signup_invite_email(request, column[4])
+                        signup_invite_email(request, column[4], generated_pass)
                         
                     except IntegrityError as e: 
                         messages.warning(request, f"Duplicate entry, Please don't import an already existing User Index Number And Email")
