@@ -1,16 +1,18 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %} 
-{% block title %}Edit book{% endblock %}
+{% block title %}Edit Subject{% endblock %}
 
 {% block content %}
 <div class="container sign-up">
     <form action="" method="POST" class="form mt-3 p-4 bg-dark sign-up-form">
         {% csrf_token %}
-        <legend class="text-center">Edit book details</legend>
-        {{form.as_p}}
+        <legend class="text-center">Edit Subject details</legend>
+        {{form|crispy}}
+        <br>
+        <br>
         <div class="lower text-center">
             <input type="submit" class="btn mb-3 btn-primary" name="edit user" value="Save">
-            <a href="{% url 'view-books' %}" class="btn mb-3 btn-danger" >Go back</a>
+            <a href="{% url 'view-subjects' %}" class="btn mb-3 btn-danger" >Go back</a>
             {{form.errors}}
         </div>
     </form>

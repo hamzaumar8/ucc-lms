@@ -11,6 +11,11 @@ class CreateUserForm(UserCreationForm):
             'username', 'email', 'password1', 'password2', 'first_name', 'last_name'
         ]
 
+class ProfileUserUpdateForm(ModelForm):
+    class Meta:
+        model = Student
+        fields = ['index_number']
+
 class AddBookForm(ModelForm):
     class Meta:
         model = Book

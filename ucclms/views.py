@@ -13,7 +13,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import AddSubjectForm, BorrowBookForm, CreateStudentForm, CreateUserForm, AddBookForm, AlterBookRecord, EditStudentProfile, RecommendBookForm, BorrowBookForm
+from .forms import AddSubjectForm, BorrowBookForm, CreateStudentForm, CreateUserForm, AddBookForm, AlterBookRecord, EditStudentProfile, ProfileUserUpdateForm, RecommendBookForm, BorrowBookForm
 from .models import *
 from .decorators import unauthenticated_user, allowed_users
 from datetime import datetime, timedelta
@@ -77,19 +77,25 @@ def adminDashboard(request):
 
 @unauthenticated_user
 def signUp(request):
+    sform = ProfileUserUpdateForm()
     form = CreateUserForm()
 
     if request.method == 'POST':
+        sform = ProfileUserUpdateForm(request.POST)
         form = CreateUserForm(request.POST)
         if form.is_valid():
+            print(sform)
             user = form.save()
             username = form.cleaned_data.get('username')
             group = Group.objects.get(name='student')
             user.groups.add(group)
+            user_profile = user.student
+            user_profile.index_number = sform.cleaned_data['index_number']
+            user_profile.save()
             messages.success(request, f'Account created for {username}')
  
             return redirect('login')
-    context = {'form': form}
+    context = {'form': form, 'sform': sform}
     return render(request, 'ucclms/sign-up.html', context)
 
 
@@ -343,6 +349,21 @@ def editBook(request, pk):
     context = {'form': form}
     return render(request, 'ucclms/edit-book.html', context)
 
+@allowed_users(allowed_roles=['admin'])
+def editSubject(request, pk):
+    book = Subject.objects.get(id=pk)
+    form = AddSubjectForm(instance=book)
+    
+    if request.method == 'POST':
+        form = AddSubjectForm(request.POST, instance=book)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'{book} has been updated')
+            return redirect('view-subjects')
+        
+    context = {'form': form}
+    return render(request, 'ucclms/edit-subject.html', context)
+
 
 @allowed_users(allowed_roles=['admin'])
 def deleteBook(request, pk):
@@ -361,7 +382,7 @@ def deleteSubject(request, *args, **kwargs):
     subject = get_object_or_404(Subject, pk=kwargs["id"])
     subject.delete()
     messages.success(request, f'{subject} has been deleted  successfully')
-    return redirect(reverse('books-not-returned'))
+    return redirect(reverse('view-subjects'))
 
 
 @allowed_users(allowed_roles=['admin'])
