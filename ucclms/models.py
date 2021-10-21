@@ -56,14 +56,12 @@ class Student(models.Model):
     index_number = models.CharField(max_length=20, blank=True, null=True)
     profile_pic = models.ImageField(blank=True, null=True)
     
-    def __str__(self):
-        return self.user.email
+   
 
 
 def student_receiver(sender, instance, created, *args, **kwargs):
     if created:
-        print('checK', instance.id)
-        student = Student.objects.create(user=instance)
+        Student.objects.create(user=instance)
 
 post_save.connect(student_receiver, sender=User)    
     
