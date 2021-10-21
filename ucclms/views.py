@@ -225,7 +225,14 @@ def userPage(request):
     return render(request, 'ucclms/user-page.html')
 
 def download_book_deomo_file(request):
-    filepath = settings.DEMO_DOWNLOAD_CSV_FILE
+    path = 'Books-demo.csv'
+    filepath = os.path.join(settings.DEMO_ROOT, path)
+    return serve(request, os.path.basename(filepath), os.path.dirname(filepath))
+
+
+def download_user_deomo_file(request):
+    path = 'Users-demo.csv'
+    filepath = os.path.join(settings.DEMO_ROOT, path)
     return serve(request, os.path.basename(filepath), os.path.dirname(filepath))
 
 

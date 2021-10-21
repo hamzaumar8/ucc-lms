@@ -126,6 +126,8 @@ MEDIA_URL = '/img/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/img')
 
+DEMO_ROOT = os.path.join(BASE_DIR, 'static/csv')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -149,5 +151,3 @@ django_heroku.settings(locals())
 
 
 
-if DEBUG:
-    DEMO_DOWNLOAD_CSV_FILE = '/static/csv/Book-demo.csv'

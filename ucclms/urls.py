@@ -40,4 +40,5 @@ urlpatterns = [
 
     # Demo Files
     path("dowload-book-demo-file/", views.download_book_deomo_file, name="download-book-demo"),
+    path("dowload-user-demo-file/", views.download_user_deomo_file, name="download-user-demo"),
 ]
