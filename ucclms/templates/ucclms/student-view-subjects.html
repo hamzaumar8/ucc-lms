@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'stubase.html' %}
 
 {% block title %}View books{% endblock %}
 
@@ -8,7 +8,7 @@
 <section class="section">
     <div class="card">
         <div class="card-header">
-            <a href="{% url 'add-subject' %}" class="btn btn-primary mb-2"><i class="fas fa-book-medical"></i> Add subject</a>
+           
         </div>
         <div class="card-body">
             <table class='table' id="table_id">
@@ -17,7 +17,6 @@
                         <td>ID</td>
                         <td>Name</td>
                         <td>No of book</td>
-                        <td></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,13 +26,10 @@
                         <td>{{book.name}}</td>
                         <td>
                             <span style="margin: 0 10px">{{book.num_subject}}</span>
-                            <a href="{% url 'subject-cat-info' book.id %}" class="btn  btn-sm">view all
+                            <a href="{% url 'stu-subject-cat-info' book.id %}" class="btn  btn-sm">view all
                                 books</a></td>
 
-                        <td>
-                            <a href="{% url 'edit-subject' book.id %}" class="btn btn-light btn-sm">Edit</a>
-                            <a href="{% url 'delete-subject' book.id %}" class="btn btn-danger btn-sm">Del</a>
-                        </td>
+                       
                     </tr>
                     {% endfor %}
                 </tbody>

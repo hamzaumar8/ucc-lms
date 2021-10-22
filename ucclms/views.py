@@ -287,6 +287,12 @@ def viewSubject(request):
     context = {'dash_title':"Books Categories (Subjects)",'subjects': subjects}
     return render(request, 'ucclms/view-subjects.html', context)
 
+@login_required(login_url='login')
+def viewSubjectStudent(request):
+    subjects = Subject.objects.order_by('-id').annotate(num_subject=Count('booksubject', distinct=True))
+    context = {'dash_title':"Books Categories (Subjects)",'subjects': subjects}
+    return render(request, 'ucclms/student-view-subjects.html', context)
+
 
 
 
@@ -512,6 +518,14 @@ def viewSubjectDet(request, *args, **kwargs):
     books = Book.objects.filter(subject=subject).order_by('-id')
     context = {'dash_title':"Books Categories (Subjects)",'books': books}
     return render(request, 'ucclms/view-book-cat.html', context)
+
+
+@login_required(login_url='login')
+def viewSubjectDetStu(request, *args, **kwargs):
+    subject = get_object_or_404(Subject, pk=kwargs["id"])
+    books = Book.objects.filter(subject=subject).order_by('-id')
+    context = {'dash_title':"Books Categories (Subjects)",'books': books}
+    return render(request, 'ucclms/view-book-cat-stu.html', context)
 
 
 
