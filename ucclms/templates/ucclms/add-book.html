@@ -3,41 +3,53 @@
 {% block title %}User{% endblock %}
 
 {% block content %}
-<div class="container sign-up">
-    <form action="" method="POST" class="form mt-3 p-4 bg-dark sign-up-form">
-        {% csrf_token %}
-        <legend class="text-center">Add Book</legend>
-        <div class="form-group mb-3">
-            {{form.title.label}}
-            {{form.title}}
-        </div>
-        <div class="form-group mb-3">
-            {{form.subject.label}}
-            {{form.subject}}
-        </div>
-        <div class="form-group mb-3">
-            {{form.publisher.label}}
-            {{form.publisher}}
-        </div>
-        <div class="form-group mb-3">
-            {{form.author.label}}
-            {{form.author}}
-        </div>
-        <div class="form-group mb-3">
-            {{form.location.label}}
-            {{form.location}}
-        </div>
-        <div class="form-group mb-3">
-            {{form.year.label}}
-            {{form.year}}
-        </div>
+<section class="section">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <legend>Add Book</legend>
+            </div>
+            <div class="card-body">
+                <div class="container sign-up">
+                    <form action="" method="POST" class="form sin-up-form">
+                        <div class="alert alert-danger">
+                            {{form.errors}}
+                        </div>
+                        {% csrf_token %}
+                        <div class="form-group mb-3">
+                            {{form.title.label}}
+                            {{form.title}}
+                        </div>
+                        <div class="form-group mb-3">
+                            {{form.subject.label}}
+                            {{form.subject}}
+                        </div>
+                        <div class="form-group mb-3">
+                            {{form.publisher.label}}
+                            {{form.publisher}}
+                        </div>
+                        <div class="form-group mb-3">
+                            {{form.author.label}}
+                            {{form.author}}
+                        </div>
+                        <div class="form-group mb-3">
+                            {{form.location.label}}
+                            {{form.location}}
+                        </div>
+                        <div class="form-group mb-3">
+                            {{form.year.label}}
+                            {{form.year}}
+                        </div>
 
-        <div class="lower text-center">
-            <input type="submit" class="btn mb-3 btn-primary" name="edit user" value="Save">
-            <a href="{% url 'view-books' %}" class="btn mb-3 btn-danger" >Go back</a>
-            {{form.errors}}
+                        <div class="lower text-center">
+                            <input type="submit" class="btn mb-3 btn-primary" name="edit user" value="Save">
+                            <a href="{% url 'view-books' %}" class="btn mb-3 btn-danger">Go back</a>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-    </form>
-</div>
-    
+    </div>
+</section>
 {% endblock %}

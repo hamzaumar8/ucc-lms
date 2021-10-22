@@ -4,34 +4,36 @@
 
 {% block content %}
 <section class="section">
-    <div class="card">
-        <div class="card-header">
-            <legend>Borrowed Book Records for <strong style="text-transform: capitalize;">{{user}}</strong></legend>
-        </div>
-        <div class="card-body">
-<div class="container borrow-book mt-5">
-    <form action="" method="POST">
-        <style>
-            select{
-                padding: 1rem;
-                border-radius: 10px;
-            }
-        </style>
-        <legend>Confirm request for </legend>
-        {% csrf_token %}
-        {{form.as_p}}
-        <div class="ctas mt-3">
-            <button class="btn btn-primary" type="submit">Confirm</button>
-            <a href="{% url 'student-view-books' %}" class="btn btn-secondary" type="submit">Go back</a>
-        </div>
-    </form>
-    {% for message in messages %}
-        <p class="p-2">{{message}}</p>
-    {% endfor %}
-</div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <legend>Borrowed Book Records for <strong style="text-transform: capitalize;">{{user}}</strong></legend>
+            </div>
+            <div class="card-body">
+                <div class="container borrow-book mt-5">
+                    <form action="" method="POST">
+                        <style>
+                            select {
+                                padding: 1rem;
+                                border-radius: 10px;
+                            }
+                        </style>
+                        <legend>Confirm request for </legend>
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <div class="ctas mt-3">
+                            <button class="btn btn-primary" type="submit">Confirm</button>
+                            <a href="{% url 'student-view-books' %}" class="btn btn-secondary" type="submit">Go back</a>
+                        </div>
+                    </form>
+                    {% for message in messages %}
+                    <p class="p-2">{{message}}</p>
+                    {% endfor %}
+                </div>
 
-</div>
-</div>
+            </div>
+        </div>
+    </div>
 </section>
 
 {% endblock %}

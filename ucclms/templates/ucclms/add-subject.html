@@ -3,25 +3,39 @@
 {% block title %}User{% endblock %}
 
 {% block content %}
-<div class="container sign-up">
-    <form action="" method="POST" class="form mt-3 p-4 bg-dark sign-up-form">
-        {% csrf_token %}
-        <legend class="text-center">Add Subject</legend>
-        <div class="form-group mb-3">
-            {{form.name.label}}
-            {{form.name}}
-        </div>
-        <div class="form-group mb-3">
-            {{form.subject.label}}
-            {{form.subject}}
-        </div>
 
-        <div class="lower text-center">
-            <input type="submit" class="btn mb-3 btn-primary" name="edit user" value="Save">
-            <a href="{% url 'view-subjects' %}" class="btn mb-3 btn-danger" >Go back</a>
-            {{form.errors}}
-        </div>
-    </form>
-</div>
-    
-{% endblock %}
+<section class="section">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                Add Subject
+            </div>
+            <div class="card-body">
+                <div class="container sign-up">
+                    <form action="" method="POST" class="form">
+                        <div class="alert alert-danger">
+                            {{form.errors}}
+                        </div>
+                        {% csrf_token %}
+                        <div class="form-group mb-3">
+                            {{form.name.label}}
+                            {{form.name}}
+                        </div>
+                        <div class="form-group mb-3">
+                            {{form.subject.label}}
+                            {{form.subject}}
+                        </div>
+
+                        <div class="lower text-center">
+                            <input type="submit" class="btn mb-3 btn-primary" name="edit user" value="Save">
+                            <a href="{% url 'view-subjects' %}" class="btn mb-3 btn-danger">Go back</a>
+                            
+                        </div>
+                    </form>
+                </div>
+                </div>
+                </div>
+                </div>
+                </section>
+
+                {% endblock %}

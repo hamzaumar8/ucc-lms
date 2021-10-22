@@ -1,20 +1,32 @@
 {% extends 'base.html' %}
-{% load crispy_forms_tags %} 
+{% load crispy_forms_tags %}
 {% block title %}Edit book{% endblock %}
 
 {% block content %}
-<div class="container sign-up">
-    <form action="" method="POST" class="form mt-3 p-4 bg-dark sign-up-form">
-        {% csrf_token %}
-        <legend class="text-center">Edit book details</legend>
-        {{form|crispy}}
-        <br>
-        <div class="lower text-center">
-            <input type="submit" class="btn mb-3 btn-primary" name="edit user" value="Save">
-            <a href="{% url 'view-books' %}" class="btn mb-3 btn-danger" >Go back</a>
-            {{form.errors}}
+
+<section class="section">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                Edit book details
+            </div>
+            <div class="card-body">
+                <div class="container sign-up">
+                    <form action="" method="POST" class="form">
+                        <div class="alert alert-danger">
+                            {{form.errors}}
+                        </div>
+                        {% csrf_token %}
+                        {{form|crispy}}
+                        <br>
+                        <div class="lower text-center">
+                            <input type="submit" class="btn mb-3 btn-primary" name="edit user" value="Save">
+                            <a href="{% url 'view-books' %}" class="btn mb-3 btn-danger">Go back</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-    </form>
-</div>
-    
+    </div>
+</section>
 {% endblock %}
