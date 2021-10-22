@@ -1,8 +1,14 @@
-{% extends 'base.html' %}
+{% extends 'stubase.html' %}
 
 {% block title %}View books{% endblock %}
 
 {% block content %}
+<section class="section">
+    <div class="card">
+        <div class="card-header">
+            <legend>Borrowed Book Records for <strong style="text-transform: capitalize;">{{user}}</strong></legend>
+        </div>
+        <div class="card-body">
 <div class="container borrow-book mt-5">
     <form action="" method="POST">
         <style>
@@ -24,5 +30,8 @@
     {% endfor %}
 </div>
 
+</div>
+</div>
+</section>
 
 {% endblock %}

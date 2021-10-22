@@ -443,6 +443,7 @@ def borrowBook(request, pk):
 
 
 def studentViewBooks(request):
+    print(request.user.groups)
     books = Book.objects.all()
     if request.method == 'POST':
         book=request.post

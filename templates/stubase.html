@@ -43,64 +43,37 @@
                     
                     <ul class="menu">
                         <li class="sidebar-item active ">
-                            <a href="{% url 'admin-dashboard' %}" class='sidebar-link'>
+                            <a href="{% url 'student-dashboard' %}" class='sidebar-link'>
                                 <i data-feather="home" width="20"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="{% url 'view-users' %}" class='sidebar-link'>
-                                <i data-feather="home" width="20"></i>
-                                <span>Users</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="{% url 'view-subjects' %}" class='sidebar-link'>
-                                <i data-feather="home" width="20"></i>
-                                <span>Books Categories (Subject)</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="{% url 'view-books' %}" class='sidebar-link'>
+                            <a href="{% url 'student-view-books' %}" class='sidebar-link'>
                                 <i data-feather="home" width="20"></i>
                                 <span>All Books</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="{% url 'book-records' %}" class='sidebar-link'>
+                            <a href="{% url 'student-borrowed-books' %}" class='sidebar-link'>
                                 <i data-feather="home" width="20"></i>
-                                <span>Issue/Return Requests</span>
+                                <span>Borrowed Books</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="{% url 'books-not-returned' %}" class='sidebar-link'>
+                            <a href="{% url 'recommend-book' %}" class='sidebar-link'>
                                 <i data-feather="home" width="20"></i>
-                                <span>Books Not Returned</span>
+                                <span>Recommend Book</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
-                            <a href="{% url 'stolen-books' %}" class='sidebar-link'>
-                                <i data-feather="home" width="20"></i>
-                                <span>Stolen Books</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="{% url 'recommendations' %}" class='sidebar-link'>
-                                <i data-feather="home" width="20"></i>
-                                <span>Recommendations</span>
-                            </a>
-                        </li>
+                        
                         <li class="sidebar-item">
                             <a href="{% url 'logout' %}" class='sidebar-link'>
                                 <i data-feather="home" width="20"></i>
                                 <span>Logout</span>
                             </a>
                         </li>
-
-
                     </ul>
-
-
 
                 </div>
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>

@@ -1,48 +1,47 @@
-{% extends 'base.html' %}
+{% extends 'stubase.html' %}
 
 {% block title %}View books{% endblock %}
 
 {% block content %}
-<div class="container users mt-5">
-    <a href="{% url 'student-dashboard' %}" class="btn btn-dark mb-2"><i class="fas fa-home"></i> Home</a>
-    {% for message in messages %}
-    <br>
-    <small id="messages" class="bg-warning p-1">
-        {{message}}
-    </small>
-    <br>
-    {% endfor %}
-    <legend>Browse through our collection and make a <strong>request</strong></legend>
-    <table class="table table-striped p-3 table-dark mt-2">
-        <thead>
-            <tr>
-                <td>ID</td>
-                <td>Name</td>
-                <td>Location</td>
-                <td>Author(s)</td>
-                <td>Availability</td>
-                <td></td>
-            </tr>
-        </thead>
-        <tbody>
-            {% for book in books %}
-            <tr>
-                <td>{{book.id}}</td>
-                <td>{{book.title}}</td>
-                <td>{{book.location}}</td>
-                <td>{{book.author}}</td>
-                <td>{{book.availability}}</td>
-                <td class="request-list-item">
-                {% if book.availability > 0 %}
-                    <a href="{% url 'borrow-book' book.id %}" id="{{book.id}} request-btn" class="{{book.id}} btn request-btn btn-light">Request</a>
-                {% endif %}
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<section class="section">
+    <div class="card">
+        <div class="card-header">
+            <legend>Browse through our collection and make a <strong>request</strong></legend>
+        </div>
+        <div class="card-body">
+            <table class='table' id="table_id">
+                <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>Name</td>
+                        <td>Location</td>
+                        <td>Author(s)</td>
+                        <td>Availability</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for book in books %}
+                    <tr>
+                        <td>{{book.id}}</td>
+                        <td>{{book.title}}</td>
+                        <td>{{book.location}}</td>
+                        <td>{{book.author}}</td>
+                        <td>{{book.availability}}</td>
+                        <td class="request-list-item">
+                            {% if book.availability > 0 %}
+                            <a href="{% url 'borrow-book' book.id %}" id="{{book.id}} request-btn"
+                                class="{{book.id}} btn request-btn btn-light">Request</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
 
 
-</div>
+        </div>
+    </div>
+</section>
 
 {% endblock %}
