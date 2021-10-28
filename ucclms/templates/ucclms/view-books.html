@@ -48,6 +48,7 @@
                 </thead>
                 <tbody>
                     {% for book in books %}
+                    {% if book.availability %}
                     <tr>
                         <td>{{book.id}}</td>
                         <td>{{book.title}}</td>
@@ -60,6 +61,7 @@
                             <a href="{% url 'delete-book' book.id %}" class="btn btn-danger btn-sm">Del</a>
                         </td>
                     </tr>
+                    {% endif %}
                     {% endfor %}
                 </tbody>
             </table>
