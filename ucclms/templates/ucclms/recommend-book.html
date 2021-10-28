@@ -1,5 +1,5 @@
 {% extends 'stubase.html' %}
-
+{% load crispy_forms_tags %} 
 {% block title %}Recommend Book{% endblock %}
 {% block content %}
 <section class="section">
@@ -14,18 +14,8 @@
                     <div class="alert alert-danger">
                         {{form.errors}}
                     </div>
-                    <div class="form-group mb-5" style="cursor: not-allowed;">
-                        {{form.user.label}}
-                        {{form.user}}
-                    </div>
-                    <div class="form-group mb-5">
-                        {{form.book_name.label}}
-                        {{form.book_name}}
-                    </div>
-                    <div class="form-group mb-5">
-                        {{form.description.label}}
-                        {{form.description}}
-                    </div>
+                    {{form|crispy}}
+                    
                     <div class="lower text-center">
                         <input type="submit" value="Submit" name="submit" class="btn btn-primary">
                         <a href="{% url 'student-dashboard' %}" class="btn btn-secondary">Go back</a>
@@ -36,5 +26,10 @@
         </div>
     </div>
 </section>
+
+
+<script type="text/javascript">
+    document.getElementById('div_id_user').style.display = 'none';;
+</script>
 
 {% endblock %}
