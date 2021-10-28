@@ -22,19 +22,22 @@
                 </thead>
                 <tbody>
                     {% for book in books %}
-                    <tr>
-                        <td>{{book.id}}</td>
-                        <td>{{book.title}}</td>
-                        <td>{{book.location}}</td>
-                        <td>{{book.author}}</td>
-                        <td>{{book.availability}}</td>
-                        <td class="request-list-item">
-                            {% if book.availability > 0 %}
-                            <a href="{% url 'borrow-book' book.id %}" id="{{book.id}} request-btn"
-                                class="{{book.id}} btn request-btn btn-light">Request</a>
-                            {% endif %}
-                        </td>
-                    </tr>
+                        {% if book.availability > 0 %}
+
+                            <tr>
+                                <td>{{book.id}}</td>
+                                <td>{{book.title}}</td>
+                                <td>{{book.location}}</td>
+                                <td>{{book.author}}</td>
+                                <td>{{book.availability}}</td>
+                                <td class="request-list-item">
+                                    {% if book.availability > 0 %}
+                                    <a href="{% url 'borrow-book' book.id %}" id="{{book.id}} request-btn"
+                                        class="{{book.id}} btn request-btn btn-light">Request</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endif %}
                     {% endfor %}
                 </tbody>
             </table>
