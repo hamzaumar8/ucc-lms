@@ -439,8 +439,13 @@ def borrowBook(request, pk):
         form.user = request.user
         form = BorrowBookForm(request.POST)
         if form.is_valid():
+
             form.user = request.user
             form.save()
+            bk = Book.objects.filter(id=pk)
+            if bk.availability > 0:
+                avail = bk.availability - 1
+                bk.update(availability=avail)
             messages.success(request, f'Book requested. You can pick up your book "{book.title}" at Sam Jonah Library at "{book.location}"')
             return redirect('student-dashboard')
         
